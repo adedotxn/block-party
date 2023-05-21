@@ -12,7 +12,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const generateInvite = customAlphabet(alphanumeric, 7);
+  const generateInvite = customAlphabet(alphanumeric, 6);
 
   // Generating Invite
   if (req.method === 'GET' && req.query.id === undefined) {
