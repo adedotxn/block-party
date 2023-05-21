@@ -19,12 +19,6 @@ export default function handler(
     const inviteCode = generateInvite();
     console.log(inviteCode);
 
-    /** TODO:
-     * 1. save the invite code/link with the board model
-     * so that it can be matched with the board
-     *
-     * 2. The invite link can be "https://{{app_url}}/{{inviteCode}}"
-     * */
     return res.status(200).json({ status: 'success', code: inviteCode });
   }
 
