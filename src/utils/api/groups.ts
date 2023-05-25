@@ -110,3 +110,5 @@ export const getSpecificGroups = async (name: string, boardCode: string) => {
     console.log(error);
   }
 };
+
+const setGroupAdmin = async () => {};
