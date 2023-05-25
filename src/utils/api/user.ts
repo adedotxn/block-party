@@ -67,6 +67,23 @@ export const getUser = async (username: string) => {
   }
 };
 
+export const getUserWithId = async (userId: string) => {
+  const usersRef = collection(db, 'users');
+  const q = query(usersRef, where('userId', '==', userId));
+  const snapshot = await getDocs(q);
+  let document;
+  if (snapshot.empty) {
+    console.log('No matching document');
+    return { status: 'error', message: "Couldn't find user" };
+  } else {
+    snapshot.forEach((doc) => {
+      document = doc.data();
+    });
+
+    return { status: 'success', data: document };
+  }
+};
+
 export const addBoardtoFacilitatorDoc = async (
   userId: string,
   board: { id: string; name: string }

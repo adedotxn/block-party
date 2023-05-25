@@ -13,7 +13,9 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const code = req.query.code as string;
-  const { name } = req.body;
+
+  //accepts the name of the group and id of the user creating it
+  const { groupName, creatorId } = req.body;
 
   // Get all the groups
   if (req.method === 'GET') {
@@ -30,12 +32,11 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    /** Todo? : set group creator as admin
-     * and also as a member ..but waiting how we want to uniquely query users
+    /** 
      *
      * checking for  duplicate names and returning an error
      */
-    const response = await createGroup(name, code);
+    const response = await createGroup(groupName, code, creatorId);
 
     if (response?.status == 'success') {
       return res

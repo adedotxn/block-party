@@ -9,7 +9,11 @@ import {
 } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 
-export const createGroup = async (name: string, boardCode: string) => {
+export const createGroup = async (
+  name: string,
+  boardCode: string,
+  creatorId: string
+) => {
   const groupId = nanoid();
   try {
     //getting the board from the board code
@@ -29,6 +33,7 @@ export const createGroup = async (name: string, boardCode: string) => {
       // Creating a new group's document in the collection
       const newGroup = {
         name,
+        adminId: creatorId,
         id: groupId,
         members: [],
         allPosts: [],
