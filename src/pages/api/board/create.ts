@@ -33,9 +33,11 @@ export default async function handler(
   };
 
   const create = await createUser(userData, 'facilitator');
-  const userIsCreated = create?.status === 'success';
 
-  if (userIsCreated && create?.userId) {
+  if (create?.status === 'error')
+    return res.status(400).json({ status: 'error', message: create.message });
+
+  if (create?.status === 'success' && create?.userId) {
     const facilitator = { id: create?.userId, username };
     const response = await createBoard(boardName, facilitator);
 

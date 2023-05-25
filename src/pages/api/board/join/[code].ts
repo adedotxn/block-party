@@ -49,7 +49,11 @@ export default async function handler(
       areaOfResidence,
     };
     const response = await createUser(userData, 'member');
-    console.log({ response });
+
+    if (response?.status === 'error')
+      return res
+        .status(400)
+        .json({ status: 'error', message: response.message });
 
     if (response?.userId) {
       try {

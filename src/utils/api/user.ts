@@ -24,6 +24,10 @@ export const createUser = async (
   user: User,
   role: 'member' | 'facilitator'
 ) => {
+  const userAlreadyExists = await getUser(user.username);
+  if (userAlreadyExists?.status === 'success')
+    return { status: 'error', message: 'Username already in use' };
+
   try {
     const userRef = collection(db, 'users');
     const userId = nanoid();

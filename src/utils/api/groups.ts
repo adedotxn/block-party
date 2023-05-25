@@ -10,11 +10,15 @@ import {
 import { nanoid } from 'nanoid';
 
 export const createGroup = async (
-  name: string,
-  boardCode: string,
-  creatorId: string
+  groupDetails: { name: string; description: string; adminId: string },
+  boardCode: string
 ) => {
   const groupId = nanoid();
+
+  const groupExists = await getSpecificGroups(groupDetails.name, boardCode);
+  if (groupExists?.status === 'success')
+    return { status: 'error', message: 'Group with this name already exists' };
+
   try {
     //getting the board from the board code
     const boardsRef = collection(db, 'boards');
@@ -32,11 +36,12 @@ export const createGroup = async (
 
       // Creating a new group's document in the collection
       const newGroup = {
-        name,
-        adminId: creatorId,
+        name: groupDetails.name,
+        adminId: groupDetails.adminId,
         id: groupId,
         members: [],
         allPosts: [],
+        description: groupDetails.description,
       };
       await addDoc(groupRef, newGroup);
       return {
@@ -70,14 +75,16 @@ export const getGroups = async (boardCode: string) => {
 
       if (snapshot.empty) {
         console.log('No matching document');
-        return { status: 'error', message: 'No Such Group Found' };
+        return { status: 'error', message: 'No Group Found' };
       } else {
         const groups = snapshot.docs.map((doc) => doc.data());
         return { status: 'success', data: groups };
       }
     }
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      return { status: 'error', message: error };
+    }
   }
 };
 
