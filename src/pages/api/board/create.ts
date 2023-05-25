@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { createBoard } from '@/utils/api/board';
-import { User, addBoardtoFacilitator, createUser } from '@/utils/api/user';
+import { User, addBoardtoFacilitatorDoc, createUser } from '@/utils/api/user';
 import { ResponseInterface } from '@/utils/interface';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -20,16 +20,13 @@ export default async function handler(
    * A Facilitator account is created, then a board is created and then updated with facilitator details
    */
 
-  const {
-    userName: name,
-    interests,
-    profilePic,
-    areaOfResidence,
-    boardName,
-  } = req.body;
+  const { fullName, username, interests, profilePic, areaOfResidence } =
+    req.body;
+  const boardName = req.body.boardName as string;
 
   const userData: User = {
-    name,
+    fullName,
+    username,
     interests,
     profilePic,
     areaOfResidence,
@@ -39,17 +36,19 @@ export default async function handler(
   const userIsCreated = create?.status === 'success';
 
   if (userIsCreated && create?.userId) {
-    const facilitator = { name: name, id: create?.userId };
+    const facilitator = { id: create?.userId, username };
     const response = await createBoard(boardName, facilitator);
 
-    if (response?.status === 'success') {
-      // if board is successfully creeted, update the board with user details
-      const boardToUser = await addBoardtoFacilitator(
+    if (response?.status === 'success' && response.boardId) {
+      // if board is successfully created, update the board with user details
+
+      const boardData = { id: response.boardId, name: boardName };
+      const boardToUserDoc = await addBoardtoFacilitatorDoc(
         create?.userId,
-        boardName
+        boardData
       );
 
-      if (boardToUser?.status === 'success') {
+      if (boardToUserDoc?.status === 'success') {
         return res
           .status(200)
           .json({ status: response.status, boardCode: response.code });

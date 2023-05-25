@@ -32,6 +32,8 @@ export default async function handler(
   if (req.method === 'POST') {
     /** Todo? : set group creator as admin
      * and also as a member ..but waiting how we want to uniquely query users
+     *
+     * checking for  duplicate names and returning an error
      */
     const response = await createGroup(name, code);
 

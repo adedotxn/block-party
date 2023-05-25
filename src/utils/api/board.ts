@@ -26,7 +26,7 @@ export type BoardType =
 
 export const createBoard = async (
   name: string,
-  facilitator: { name: string; id: string }
+  facilitator: { username: string; id: string }
 ) => {
   const generateInvite = customAlphabet(alphanumeric, 6);
   const boardCode = generateInvite();
@@ -38,7 +38,7 @@ export const createBoard = async (
       name,
       boardId,
       boardCode,
-      facilitator: { name: facilitator.name, id: facilitator.id },
+      facilitator: { username: facilitator.username, id: facilitator.id },
       members: [],
       allPosts: [],
       createdAt: currentDate,
@@ -70,7 +70,7 @@ export async function getBoardData(boardCode: string): Promise<BoardType> {
 }
 
 export const addUserToBoard = async (
-  user: { id: string; name: string },
+  user: { id: string; username: string },
   boardCode: string
 ) => {
   const boardsRef = collection(db, 'boards');
