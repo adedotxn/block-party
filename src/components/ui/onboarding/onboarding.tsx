@@ -53,13 +53,12 @@ const Onboarding = () => {
 
   return (
     <Container maxW="md" mt={8}>
-      <Stepper activeStep={step} colorScheme="teal">
-        <Step label="Step 1" />
-        <Step label="Step 2" />
-        <Step label="Step 3" />
-        <Step label="Step 4" />
-        <Step label="Step 5" />
-        <Step label="Step 6" />
+      <Stepper index={step} colorScheme="teal">
+        <Step />
+        <Step />
+        <Step />
+        <Step />
+        <Step />
       </Stepper>
       <Box mt={8} p={4} borderWidth={1} borderRadius="md">
         {step === 1 && (
