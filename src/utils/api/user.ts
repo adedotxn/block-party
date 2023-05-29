@@ -12,7 +12,8 @@ import { nanoid } from 'nanoid';
 import { currentDate } from '../constants';
 
 export type User = {
-  name: string;
+  fullName: string;
+  username: string;
   interests: string[];
   profilePic: string;
   areaOfResidence: string;
@@ -23,12 +24,17 @@ export const createUser = async (
   user: User,
   role: 'member' | 'facilitator'
 ) => {
+  const userAlreadyExists = await getUser(user.username);
+  if (userAlreadyExists?.status === 'success')
+    return { status: 'error', message: 'Username already in use' };
+
   try {
     const userRef = collection(db, 'users');
     const userId = nanoid();
     const newUser = {
       userId,
-      name: user.name,
+      fullName: user.fullName,
+      username: user.username,
       interests: user.interests,
       profilePic: user.profilePic,
       areaOfResidence: user.areaOfResidence,
@@ -48,7 +54,44 @@ export const createUser = async (
   }
 };
 
-export const addBoardtoFacilitator = async (userId: string, board: string) => {
+export const getUser = async (username: string) => {
+  const usersRef = collection(db, 'users');
+  const q = query(usersRef, where('username', '==', username));
+  const snapshot = await getDocs(q);
+  let document;
+  if (snapshot.empty) {
+    console.log('No matching document');
+    return { status: 'error', message: "Couldn't find user" };
+  } else {
+    snapshot.forEach((doc) => {
+      document = doc.data();
+    });
+
+    return { status: 'success', data: document };
+  }
+};
+
+export const getUserWithId = async (userId: string) => {
+  const usersRef = collection(db, 'users');
+  const q = query(usersRef, where('userId', '==', userId));
+  const snapshot = await getDocs(q);
+  let document;
+  if (snapshot.empty) {
+    console.log('No matching document');
+    return { status: 'error', message: "Couldn't find user" };
+  } else {
+    snapshot.forEach((doc) => {
+      document = doc.data();
+    });
+
+    return { status: 'success', data: document };
+  }
+};
+
+export const addBoardtoFacilitatorDoc = async (
+  userId: string,
+  board: { id: string; name: string }
+) => {
   const userRef = collection(db, 'users');
   const q = query(userRef, where('userId', '==', userId));
   const querySnapshot = await getDocs(q);
@@ -56,7 +99,7 @@ export const addBoardtoFacilitator = async (userId: string, board: string) => {
   if (!querySnapshot.empty) {
     const doc = querySnapshot.docs[0];
     try {
-      await updateDoc(doc.ref, { board: arrayUnion(board) });
+      await updateDoc(doc.ref, { boards: arrayUnion(board) });
       return { status: 'success' };
     } catch (error) {
       return { status: 'error', error };

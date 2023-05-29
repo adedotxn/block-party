@@ -39,19 +39,25 @@ export default async function handler(
 
   // Creates User Account and then joins board
   if (req.method === 'POST') {
-    const { name: userName, interests, profilePic, areaOfResidence } = req.body;
+    const { fullName, username, interests, profilePic, areaOfResidence } =
+      req.body;
     const userData: User = {
-      name: userName,
+      fullName,
+      username,
       interests,
       profilePic,
       areaOfResidence,
     };
     const response = await createUser(userData, 'member');
-    console.log({ response });
+
+    if (response?.status === 'error')
+      return res
+        .status(400)
+        .json({ status: 'error', message: response.message });
 
     if (response?.userId) {
       try {
-        const user = { id: response?.userId, name: userData.name };
+        const user = { id: response?.userId, username };
         await addUserToBoard(user, code);
         return res
           .status(200)
