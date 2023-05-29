@@ -54,6 +54,7 @@ const Youth = () => {
             borderRadius="33"
             px="12"
             fontSize="20"
+            colorScheme="red"
           >
             Join
           </Button>

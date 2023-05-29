@@ -24,15 +24,16 @@ const DiscussionCards = () => {
           name="Philip Adewole"
           position="absolute"
           bottom="9.5rem"
+          left=".5rem"
           border="2px"
           size="md"
         />
         <Flex color="blue.1" alignItems="center" gap=".5rem" pt="1">
-          <Heading ml={12} size="sm">
+          <Heading ml={9} fontSize=".95rem">
             Philip The Great
           </Heading>
           <Text width="1" height="1" bg="blue.1" borderRadius="full" />
-          <Text fontSize="sm">3 weeks ago</Text>
+          <Text fontSize=".8rem">3 weeks ago</Text>
         </Flex>
         <Text lineHeight="1.2" mt={3}>
           Nam libero tempore cum soluta nobis est eligendi optio cumque nihil
@@ -58,16 +59,17 @@ const DiscussionCards = () => {
           name="Sarah Wong"
           position="absolute"
           bottom="9.5rem"
+          left=".5rem"
           border="2px"
           borderColor="white"
           size="md"
         />
         <Flex color="blue.1" alignItems="center" gap=".5rem" pt="1">
-          <Heading ml={12} size="sm">
+          <Heading ml={9} fontSize=".95rem">
             Sarah The Magneficent
           </Heading>
           <Text width="1" height="1" bg="blue.1" borderRadius="full" />
-          <Text fontSize="sm">2 days ago</Text>
+          <Text fontSize=".8rem">2 days ago</Text>
         </Flex>
         <Text lineHeight="1.2" mt={3}>
           Nam libero tempore cum soluta nobis est eligendi optio cumque nihil
@@ -93,16 +95,19 @@ const DiscussionCards = () => {
           name="Nottherealalanturing"
           position="absolute"
           bottom="9.5rem"
+          left=".5rem"
           border="2px"
           size="md"
         />
-        <Flex color="blue.1" alignItems="center" gap=".3rem" pt="1">
-          <Heading ml={12} size="sm">
+
+        <Flex color="blue.1" alignItems="center" gap=".2rem" pt="1">
+          <Heading ml={9} fontSize=".95rem">
             Assad The Phenomenal
           </Heading>
           <Text width="1" height="1" bg="blue.1" borderRadius="full" />
-          <Text fontSize="sm">3 weeks ago</Text>
+          <Text fontSize=".8rem">3 weeks ago</Text>
         </Flex>
+
         <Text lineHeight="1.2" mt={3}>
           Nam libero tempore cum soluta nobis est eligendi optio cumque nihil
           impedit quo minus id quod maxime placeat facere possimus.
