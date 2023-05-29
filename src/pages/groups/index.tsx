@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const Groups = () => {
   return (
-    <Container>
+    <Container p="1rem">
       <header className={styles.header}>
         <h1>My Group</h1>
         <Link href={'/'}>Show all</Link>
