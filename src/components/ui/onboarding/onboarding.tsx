@@ -23,7 +23,7 @@ const Onboarding = () => {
     router.push('/profile');
   };
 
-  const handleInterestsChange = (selectedOptions) => {
+  const handleInterestsChange = (selectedOptions: any) => {
     if (selectedOptions.length <= 6) {
       setInterests(selectedOptions);
     }
@@ -37,13 +37,13 @@ const Onboarding = () => {
 
   return (
     <Container width={{ md: '60vw' }}>
-      <Stepper activeStep={step} colorScheme="teal">
-        <Step label="Step 1" />
-        <Step label="Step 2" />
-        <Step label="Step 3" />
-        <Step label="Step 4" />
-        <Step label="Step 5" />
-        <Step label="Step 6" />
+      <Stepper index={step} colorScheme="teal">
+        <Step key="Step 1" />
+        <Step key="Step 2" />
+        <Step key="Step 3" />
+        <Step key="Step 4" />
+        <Step key="Step 5" />
+        <Step key="Step 6" />
       </Stepper>
       <Box
         display="flex"
