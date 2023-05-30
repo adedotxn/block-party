@@ -48,21 +48,16 @@ const users: User[] = [
 
 const ProfilePage: NextPage = () => {
   return (
-    <Flex
-      align="center"
-      justify="center"
-      my="30"
-      direction="column"
-      gap={1}
-      px={4}
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      h="100%"
+      w="100%"
+      py={30}
     >
-      <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        my="30"
-        gap={'10px'}
-      >
+      <Flex direction="column" align="center" justify="center" my="30" gap={1}>
         <Avatar
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
           border="2px solid #E9E9E9"
@@ -87,8 +82,8 @@ const ProfilePage: NextPage = () => {
           John Doe
         </Text>
         <Text
-          fontWeight={400}
-          fontSize="13px"
+          fontWeight={500}
+          fontSize="11px"
           lineHeight="14px"
           color="#626262"
           textAlign="center"
@@ -98,31 +93,36 @@ const ProfilePage: NextPage = () => {
       </Flex>
 
       <Box>
-        <Divider my={5} />
+        <Divider my={1} />
 
         <Text
           fontSize="12px"
           fontWeight="700"
           textAlign="left"
-          color="#797979"
+          color="#FF0000"
           letterSpacing="-0.5px"
           mb={1}
         >
           Interests
         </Text>
-        <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+        <Grid templateColumns="repeat(2, 1fr)" gap={2}>
           {interestsOptions.map((badge) => (
             <Text
               key={badge}
               borderRadius="33px"
-              background="#D9D9D9"
+              background="#003566"
               textAlign="center"
               padding="5px"
-              fontSize="9px"
+              fontSize="11px"
               lineHeight="11px"
-              fontWeight="500"
+              fontWeight="700"
               letterSpacing="-0.02em"
-              color="#626262"
+              color="#FFFFFF"
+              width="146px"
+              height="33px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
             >
               {badge}
             </Text>
@@ -135,44 +135,53 @@ const ProfilePage: NextPage = () => {
           fontSize="12px"
           fontWeight="700"
           textAlign="left"
-          color="#797979"
+          color="#FF0000"
           letterSpacing="-0.5px"
           mb={1}
         >
           Volunteer
         </Text>
-        <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+        <Grid
+          templateColumns="repeat(2, 1fr)"
+          gap={2}
+          justifyContent="space-around"
+        >
           {interestsOptions.map((badge) => (
             <Text
               key={badge}
               borderRadius="33px"
-              background="#D9D9D9"
+              background="#003566"
               textAlign="center"
               padding="5px"
-              fontSize="9px"
+              fontSize="11px"
               lineHeight="11px"
-              fontWeight="500"
+              fontWeight="700"
               letterSpacing="-0.02em"
-              color="#626262"
+              color="#FFFFFF"
+              width="146px"
+              height="33px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
             >
               {badge}
             </Text>
           ))}
         </Grid>
 
-        <Divider my={5} />
+        <Divider my={1} />
 
         <Text
           fontSize="12px"
           fontWeight="700"
           textAlign="left"
-          color="#797979"
+          color="#FF0000"
           letterSpacing="-0.5px"
-          mb={1}
+          mb={2}
         >
           Neighbours
         </Text>
-        <Grid templateColumns="repeat(4, 1fr)" gap={2}>
+        <Grid templateColumns="repeat(4, 1fr)" gap={1}>
           {users.map((user) => (
             <UserInfo
               avatarUrl={user.avatarUrl}
@@ -186,8 +195,8 @@ const ProfilePage: NextPage = () => {
             <Flex direction="column">
               <Image
                 src={addmember}
-                width={62}
-                height={62}
+                width={50}
+                height={50}
                 style={{ alignSelf: 'center' }}
                 alt="add member icon"
               />
@@ -213,7 +222,7 @@ const ProfilePage: NextPage = () => {
           </Button>
         </Grid>
       </Box>
-    </Flex>
+    </Box>
   );
 };
 

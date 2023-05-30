@@ -8,15 +8,20 @@ interface Step1Props {
 
 const Step1: React.FC<Step1Props> = ({ handler }) => {
   return (
-    <Flex align="center" justify="center" my="30" direction="column" gap={10}>
-      <Image src={logo} width={50} height={50} alt="logo" />
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      direction="column"
+      gap={10}
+    >
+      <Image src={logo} width={130} height={130} alt="logo" />
       <Flex
         direction="column"
         align="center"
         justify="center"
         my="30"
         position="relative"
-        bg="#C3C3C3"
+        bg="#003566"
         w="247px"
         h="183px"
         borderRadius="9px"
@@ -24,26 +29,26 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
         gap={'10px'}
       >
         <Avatar
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+          src="https://unsplash.com/photos/LyJAo9uwIfU/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTJ8fGtpbmclMjBjaGFybGVzfGVufDB8fHx8MTY4NTM1MDM3MHww&force=true"
           position="absolute"
           top="-25px"
-          border="2px solid #E9E9E9"
+          border="3px solid #E9E9E9"
         />
         <Text
           fontWeight={700}
           fontSize="12px"
           lineHeight="15px"
           letterSpacing="-0.02em"
-          color="#595959"
+          color="#FFFFFF"
         >
-          John Doe
+          King Charles Street
         </Text>
         <Text
           fontWeight={700}
           fontSize="16px"
           lineHeight="15px"
           letterSpacing="-0.03em"
-          color="#626262"
+          color="#FFFFFF"
           textAlign="center"
         >
           You&apos;ve been invited to join a block party.
@@ -57,7 +62,7 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
           fontSize="12px"
           lineHeight="15px"
           letterSpacing="-0.02em"
-          color="#595959"
+          color="#FF0000"
           textAlign="center"
           onClick={handler}
         >
@@ -65,7 +70,14 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
         </Button>
       </Flex>
 
-      <Text>
+      <Text
+        color={'#003566'}
+        fontWeight={700}
+        fontSize="16px"
+        lineHeight="15px"
+        letterSpacing="-0.03em"
+        textAlign="center"
+      >
         Making an impact. <br />
         Building Connections.
       </Text>

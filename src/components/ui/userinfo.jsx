@@ -7,8 +7,8 @@ function UserInfo({ avatarUrl, username, occupation }) {
         size="xl"
         src={avatarUrl}
         alt="User Avatar"
-        width={62}
-        height={62}
+        width={50}
+        height={50}
       />
       <Text
         fontSize="10px"
