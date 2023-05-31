@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { createBoard } from '@/utils/api/board';
+import { createDefaultGroups } from '@/utils/api/groups';
 import { User, addBoardtoFacilitatorDoc, createUser } from '@/utils/api/user';
 import { ResponseInterface } from '@/utils/interface';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -43,7 +44,6 @@ export default async function handler(
 
     if (response?.status === 'success' && response.boardId) {
       // if board is successfully created, update the board with user details
-
       const boardData = { id: response.boardId, name: boardName };
       const boardToUserDoc = await addBoardtoFacilitatorDoc(
         create?.userId,
@@ -51,9 +51,14 @@ export default async function handler(
       );
 
       if (boardToUserDoc?.status === 'success') {
-        return res
-          .status(200)
-          .json({ status: response.status, boardCode: response.code });
+        // then create the default groups for the board
+        const createDefGroups = await createDefaultGroups(response?.code);
+
+        if (createDefGroups.status === 'success') {
+          return res
+            .status(200)
+            .json({ status: response.status, boardCode: response.code });
+        }
       }
     } else {
       return res.status(400).json({

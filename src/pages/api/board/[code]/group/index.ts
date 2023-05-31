@@ -8,15 +8,12 @@ interface Data extends ResponseInterface {
   data?: DocumentData[];
 }
 
+// This route is to get all groups in a board and also to create specific groups
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   const boardCode = req.query.code as string;
-
-  //accepts the name of the group and id of the user creating it
-  const { groupName, description, adminId } = req.body;
-
   // Get all the groups
   if (req.method === 'GET') {
     const response = await getGroups(boardCode);
@@ -32,6 +29,8 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
+    //accepts the name of the group and id of the user creating it
+    const { groupName, description, adminId } = req.body;
     const groupDetails = { name: groupName, description, adminId };
     const response = await createGroup(groupDetails, boardCode);
 
