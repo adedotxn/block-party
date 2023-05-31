@@ -1,5 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { addUserToBoard, getBoardData } from '@/utils/api/board';
+import {
+  addBoardToUserDocs,
+  addUserToBoard,
+  getBoardData,
+} from '@/utils/api/board';
 import { User, createUser } from '@/utils/api/user';
 import { ResponseInterface } from '@/utils/interface';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -57,11 +61,28 @@ export default async function handler(
 
     if (response?.userId) {
       try {
-        const user = { id: response?.userId, username };
-        await addUserToBoard(user, code);
-        return res
-          .status(200)
-          .json({ status: 'success', message: 'User Added to Board' });
+        // after user creation, update the user docs with the board details
+        const board = await getBoardData(code);
+        if (board) {
+          const boardDetails = {
+            id: board?.boardId,
+            name: board?.name,
+          };
+
+          const addBoardToUser = await addBoardToUserDocs(
+            response?.userId,
+            boardDetails
+          );
+
+          if (addBoardToUser?.status === 'success') {
+            // then update the board docs with the user as a member
+            const user = { id: response?.userId, username };
+            await addUserToBoard(user, code);
+            return res
+              .status(200)
+              .json({ status: 'success', message: 'User Added to Board' });
+          }
+        }
       } catch (error) {
         console.log(error);
         return res
