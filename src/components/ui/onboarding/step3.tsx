@@ -1,17 +1,15 @@
-import { FormControl, FormLabel, Input } from '@chakra-ui/react';
+/* eslint-disable no-unused-vars */
+import { Button, FormControl, Input, Text } from '@chakra-ui/react';
 
 interface FormInputProps {
-  label: string;
   type: string;
   placeholder: string;
   value: string;
-  // eslint-disable-next-line no-unused-vars
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
-  label,
   type,
   placeholder,
   value,
@@ -20,13 +18,14 @@ const FormInput: React.FC<FormInputProps> = ({
 }) => {
   return (
     <FormControl mt={4}>
-      <FormLabel>{label}</FormLabel>
       <Input
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         required={required}
+        bg="#F2F2F2"
+        textAlign="center"
       />
     </FormControl>
   );
@@ -37,6 +36,7 @@ interface Step3Props {
   fullName: string;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   setFullName: React.Dispatch<React.SetStateAction<string>>;
+  handleNext: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Step3: React.FC<Step3Props> = ({
@@ -44,26 +44,52 @@ const Step3: React.FC<Step3Props> = ({
   fullName,
   setUsername,
   setFullName,
+  handleNext,
 }) => {
+  const isInputEmpty = username.trim() === '' || fullName.trim() === '';
+
   return (
     <>
+      <Text
+        fontWeight="700"
+        fontSize="25px"
+        lineHeight="25px"
+        textAlign="center"
+        color="#003566"
+      >
+        Hi! What&apos;s your name?
+      </Text>
       <FormInput
-        label="Full Name"
         type="text"
-        placeholder="Enter your full name"
+        placeholder="Enter Name"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
         required
       />
 
       <FormInput
-        label="Username"
         type="text"
-        placeholder="Enter your username"
+        placeholder="Choose a username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
       />
+      {isInputEmpty && (
+        <Text color="red.500" mt={2} fontSize="14px" textAlign="center">
+          Please enter your name and pick a username to proceed.
+        </Text>
+      )}
+      <Button
+        bg="#FF0000"
+        color="#FFFFFF"
+        onClick={(e) => !isInputEmpty && handleNext(e)}
+        width="100%"
+        height="44px"
+        borderRadius="33px"
+        disabled={isInputEmpty}
+      >
+        Next
+      </Button>
     </>
   );
 };

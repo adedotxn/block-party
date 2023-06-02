@@ -20,12 +20,12 @@
   /* font-weight: 600 */
 }
 
-.allgroups,
+/* .allgroups,
 .group_reminders {
   display: grid;
   overflow-x: scroll;
   place-items: center;
-  /* position: relative; */
+  /* position: relative; 
 }
 
 .allgroups > div,
@@ -55,4 +55,4 @@
   padding: 0rem 1rem;
   display: grid;
   place-items: center;
-}
+} */
