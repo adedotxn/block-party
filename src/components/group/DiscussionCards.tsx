@@ -21,7 +21,7 @@ const DiscussionCards = ({
         pt="2"
         pb="4"
         borderRadius="6px"
-        width="70vw"
+        width={{ base: '70vw', md: '30vw' }}
       >
         <Flex color="blue.1" alignItems="center" gap=".5rem" pt="1">
           <Heading fontSize=".95rem">{username}</Heading>
