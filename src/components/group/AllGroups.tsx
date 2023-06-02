@@ -1,4 +1,3 @@
-import styles from '@/styles/groups.module.css';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -13,9 +12,14 @@ import NextLink from 'next/link';
 import GroupAvatar from './GroupAvatar';
 
 const AllGroups = () => {
+  const sliderStyle: any = {
+    display: 'grid',
+    overflowX: 'scroll',
+    placeItems: 'center',
+  };
   return (
-    <section className={styles.allgroups}>
-      <div>
+    <section style={{ ...sliderStyle }}>
+      <div style={{ display: 'flex', gap: '1rem' }}>
         {[0, 1, 2, 3, 4].map((_, index) => (
           <Card
             bg="blackAlpha.500"
