@@ -1,12 +1,17 @@
 import AllGroups from '@/components/group/AllGroups';
 import Calender from '@/components/ui/calender';
 import styles from '@/styles/groups.module.css';
-import { Avatar, Box, Container, Flex, Spacer, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Spacer, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
 const Groups = () => {
+  const sliderStyle: any = {
+    display: 'grid',
+    overflowX: 'scroll',
+    placeItems: 'center',
+  };
   return (
-    <Container>
+    <Container p="1rem">
       <header className={styles.header}>
         <h1>My Group</h1>
         <Link href={'/'}>Show all</Link>
@@ -14,8 +19,14 @@ const Groups = () => {
 
       <AllGroups />
 
-      <div className={styles.group_reminders}>
-        <Flex>
+      <div
+        style={{
+          marginTop: '2rem',
+          paddingBottom: '4rem',
+          ...sliderStyle,
+        }}
+      >
+        <Flex gap="1rem">
           {[0, 1, 2, 3, 4].map((_, index) => (
             <Box
               key={index}
@@ -26,7 +37,7 @@ const Groups = () => {
               py={1}
               px={4}
             >
-              <Avatar
+              {/* <Avatar
                 name="Sarah Wong"
                 position="absolute"
                 bottom={{ base: '8.5rem', md: '9rem' }}
@@ -34,7 +45,7 @@ const Groups = () => {
                 border="2px"
                 borderColor="white"
                 size="md"
-              />
+              /> */}
               <Flex alignItems="center">
                 <Text
                   fontWeight="bold"

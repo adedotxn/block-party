@@ -8,3 +8,14 @@ export interface GroupInterface {
   allPosts: unknown[];
   members: string[];
 }
+
+export interface GroupData {
+  data: {
+    id: string;
+    allPosts: string[];
+    adminId: string;
+    members: string[];
+    description: string;
+    name: string;
+  };
+}

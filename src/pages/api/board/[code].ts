@@ -30,8 +30,6 @@ export default async function handler(
       });
     }
 
-    return res
-      .status(200)
-      .json({ status: 'success', data: { name, facilitator } });
+    return res.status(200).json({ status: 'success', data: response });
   }
 }

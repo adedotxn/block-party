@@ -73,6 +73,7 @@ export const addUserToBoard = async (
   user: { id: string; username: string },
   boardCode: string
 ) => {
+  // firstly update the board with the user
   const boardsRef = collection(db, 'boards');
   const q = query(boardsRef, where('boardCode', '==', boardCode));
   const querySnapshot = await getDocs(q);
@@ -80,5 +81,23 @@ export const addUserToBoard = async (
   if (!querySnapshot.empty) {
     const doc = querySnapshot.docs[0];
     await updateDoc(doc.ref, { members: arrayUnion(user) });
+  }
+};
+
+export const addBoardToUserDocs = async (
+  userId: string,
+  board: { id: string; name: string }
+) => {
+  // update the user field with the board he's in
+  const usersRef = collection(db, 'users');
+  const userQuery = query(usersRef, where('userId', '==', userId));
+  const userQuerySnapshot = await getDocs(userQuery);
+  if (!userQuerySnapshot.empty) {
+    const doc = userQuerySnapshot.docs[0];
+    await updateDoc(doc.ref, { boards: arrayUnion(board) });
+
+    return { status: 'success' };
+  } else {
+    return { status: 'error' };
   }
 };

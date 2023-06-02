@@ -60,7 +60,6 @@ export const getUser = async (username: string) => {
   const snapshot = await getDocs(q);
   let document;
   if (snapshot.empty) {
-    console.log('No matching document');
     return { status: 'error', message: "Couldn't find user" };
   } else {
     snapshot.forEach((doc) => {
@@ -77,7 +76,6 @@ export const getUserWithId = async (userId: string) => {
   const snapshot = await getDocs(q);
   let document;
   if (snapshot.empty) {
-    console.log('No matching document');
     return { status: 'error', message: "Couldn't find user" };
   } else {
     snapshot.forEach((doc) => {
