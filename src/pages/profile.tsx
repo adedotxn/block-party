@@ -6,8 +6,9 @@ import {
   Button,
   Divider,
   Flex,
-  Grid,
   Text,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import Image from 'next/image';
@@ -31,7 +32,7 @@ const interestsOptions: string[] = [
 const users: User[] = [
   {
     avatarUrl: 'https://avatars.githubusercontent.com/u/23?v=4',
-    username: 'nottherealalanturing',
+    username: 'ausername',
     occupation: 'human',
   },
   {
@@ -55,172 +56,191 @@ const ProfilePage: NextPage = () => {
       justifyContent="center"
       h="100%"
       w="100%"
-      py={30}
+      py={10}
     >
-      <Flex direction="column" align="center" justify="center" my="30" gap={1}>
+      <Flex direction="column" align="center" justify="center" my="4" gap={2}>
         <Avatar
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
           border="2px solid #E9E9E9"
-          h={'172px'}
-          w={'172px'}
+          h={{ base: '120px', md: '172px' }}
+          w={{ base: '120px', md: '172px' }}
         >
           <AvatarBadge
             borderColor="papayawhip"
             bg="tomato"
-            boxSize="2em"
+            boxSize={{ base: '1.5em', md: '2em' }}
             transform="translate(0%, 0%)"
           />
         </Avatar>
         <Text
-          fontWeight={700}
+          textAlign="center"
+          fontWeight="700"
           fontSize="27px"
           lineHeight="30px"
-          letterSpacing="-0.408px"
-          color="#626262"
-          textAlign="center"
+          color="#003566"
         >
           John Doe
         </Text>
         <Text
-          fontWeight={500}
-          fontSize="11px"
-          lineHeight="14px"
-          color="#626262"
+          fontWeight={400}
+          fontSize={'13px'}
+          lineHeight={{ base: '12px', md: '14px' }}
+          color="#797979"
           textAlign="center"
         >
           This is a bio containing a description about me.
         </Text>
       </Flex>
 
-      <Box>
+      <Box width="100%" maxWidth={{ base: '280px', md: '600px' }}>
         <Divider my={1} />
 
-        <Text
-          fontSize="12px"
-          fontWeight="700"
-          textAlign="left"
-          color="#FF0000"
-          letterSpacing="-0.5px"
-          mb={1}
-        >
-          Interests
-        </Text>
-        <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+        <Flex justifyContent="space-between" alignItems="center">
+          <Text
+            fontSize={{ base: '10px', md: '12px' }}
+            fontWeight="700"
+            textAlign="left"
+            color="#FF0000"
+            letterSpacing="-0.5px"
+            mb={1}
+          >
+            Interests
+          </Text>
+          <Button
+            variant="unstyled"
+            fontWeight="400"
+            fontSize="10px"
+            color="#626262"
+          >
+            edit
+          </Button>
+        </Flex>
+        <Wrap spacing={2}>
           {interestsOptions.map((badge) => (
-            <Text
-              key={badge}
-              borderRadius="33px"
-              background="#003566"
-              textAlign="center"
-              padding="5px"
-              fontSize="11px"
-              lineHeight="11px"
-              fontWeight="700"
-              letterSpacing="-0.02em"
-              color="#FFFFFF"
-              width="146px"
-              height="33px"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {badge}
-            </Text>
+            <WrapItem key={badge}>
+              <Text
+                borderRadius="33px"
+                background="#003566"
+                textAlign="center"
+                padding="5px"
+                fontSize={{ base: '9px', md: '11px' }}
+                lineHeight={{ base: '9px', md: '11px' }}
+                fontWeight={700}
+                letterSpacing="-0.02em"
+                color="#FFFFFF"
+                width={{ base: '35vw', md: '35vw' }}
+                height={{ base: '23px', md: '33px' }}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {badge}
+              </Text>
+            </WrapItem>
           ))}
-        </Grid>
+        </Wrap>
 
         <Divider my={5} />
-
-        <Text
-          fontSize="12px"
-          fontWeight="700"
-          textAlign="left"
-          color="#FF0000"
-          letterSpacing="-0.5px"
-          mb={1}
-        >
-          Volunteer
-        </Text>
-        <Grid
-          templateColumns="repeat(2, 1fr)"
-          gap={2}
-          justifyContent="space-around"
-        >
+        <Flex justifyContent="space-between" alignItems="center">
+          <Text
+            fontSize={{ base: '10px', md: '12px' }}
+            fontWeight="700"
+            textAlign="left"
+            color="#FF0000"
+            letterSpacing="-0.5px"
+            mb={1}
+          >
+            Volunteer
+          </Text>
+          <Button
+            variant="unstyled"
+            fontWeight="400"
+            fontSize="10px"
+            color="#626262"
+          >
+            edit
+          </Button>
+        </Flex>
+        <Wrap spacing={2} justifyContent="space-between">
           {interestsOptions.map((badge) => (
-            <Text
-              key={badge}
-              borderRadius="33px"
-              background="#003566"
-              textAlign="center"
-              padding="5px"
-              fontSize="11px"
-              lineHeight="11px"
-              fontWeight="700"
-              letterSpacing="-0.02em"
-              color="#FFFFFF"
-              width="146px"
-              height="33px"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {badge}
-            </Text>
+            <WrapItem key={badge}>
+              <Text
+                borderRadius="33px"
+                background="#003566"
+                textAlign="center"
+                padding="5px"
+                fontSize={{ base: '9px', md: '11px' }}
+                lineHeight={{ base: '9px', md: '11px' }}
+                fontWeight={700}
+                letterSpacing="-0.02em"
+                color="#FFFFFF"
+                width={{ base: '35vw', md: '35vw' }}
+                height={{ base: '23px', md: '33px' }}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {badge}
+              </Text>
+            </WrapItem>
           ))}
-        </Grid>
+        </Wrap>
 
         <Divider my={1} />
 
         <Text
-          fontSize="12px"
+          fontSize={{ base: '10px', md: '12px' }}
           fontWeight="700"
           textAlign="left"
           color="#FF0000"
           letterSpacing="-0.5px"
           mb={2}
         >
-          Neighbours
+          Friends
         </Text>
-        <Grid templateColumns="repeat(4, 1fr)" gap={1}>
+        <Wrap spacing={4}>
           {users.map((user) => (
-            <UserInfo
-              avatarUrl={user.avatarUrl}
-              username={user.username}
-              occupation={user.occupation}
-              key={user.username}
-            />
+            <WrapItem key={user.username}>
+              <UserInfo
+                avatarUrl={user.avatarUrl}
+                username={user.username}
+                occupation={user.occupation}
+              />
+            </WrapItem>
           ))}
 
-          <Button variant="unstyled" onClick={() => console.log('clicked')}>
-            <Flex direction="column">
-              <Image
-                src={addmember}
-                width={50}
-                height={50}
-                style={{ alignSelf: 'center' }}
-                alt="add member icon"
-              />
-              <Text
-                fontSize="10px"
-                fontWeight="700"
-                mt={4}
-                color="#626262"
-                height="10px"
-              >
-                {'Add'}
-              </Text>
-              <Text
-                fontSize="10px"
-                fontWeight="500"
-                mt={2}
-                color="#626262"
-                height="10px"
-              >
-                {'Member'}
-              </Text>
-            </Flex>
-          </Button>
-        </Grid>
+          <WrapItem>
+            <Button variant="unstyled" onClick={() => console.log('clicked')}>
+              <Flex direction="column">
+                <Image
+                  src={addmember}
+                  width={45}
+                  height={45}
+                  style={{ alignSelf: 'center' }}
+                  alt="add member icon"
+                />
+                <Text
+                  fontSize={{ base: '8px', md: '10px' }}
+                  fontWeight={700}
+                  mt={4}
+                  color="#626262"
+                  height="10px"
+                >
+                  {'Add'}
+                </Text>
+                <Text
+                  fontSize={{ base: '8px', md: '10px' }}
+                  fontWeight={500}
+                  mt={2}
+                  color="#626262"
+                  height="10px"
+                >
+                  {'Member'}
+                </Text>
+              </Flex>
+            </Button>
+          </WrapItem>
+        </Wrap>
       </Box>
     </Box>
   );

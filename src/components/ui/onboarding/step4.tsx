@@ -57,22 +57,21 @@ function InterestsCheckboxGroup({
   const selectedImageOpacity = useColorModeValue(1, 0.5);
 
   return (
-    <FormControl mt={4}>
+    <FormControl mt={4} textAlign="center">
       <FormLabel
         fontWeight="700"
         fontSize="25px"
         lineHeight="25px"
-        textAlign="center"
         color="#003566"
       >
-        Hi! {user}, what are <br /> you interested in?
+        Hi, {user}! What are you interested in?
       </FormLabel>
       <CheckboxGroup
         colorScheme="blue"
         onChange={handleInterestsChange}
         value={value}
       >
-        <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+        <Grid templateColumns="repeat(auto-fit, minmax(100px, 1fr))" gap={4}>
           {interestsOptions.map((interest) => (
             <GridItem key={interest.title}>
               <Checkbox
@@ -113,7 +112,7 @@ function InterestsCheckboxGroup({
                 <Image
                   src={interest.imageSrc}
                   alt={interest.title}
-                  boxSize="100px"
+                  boxSize="80px"
                   borderRadius="md"
                 />
                 <span>{interest.title}</span>
