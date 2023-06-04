@@ -22,8 +22,21 @@ import {
   Text,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useState } from 'react';
 
 const Group = () => {
+  const [joined, setJoined] = useState(false);
+
+  const joinGroup = () => {
+    if (joined) {
+      setJoined(false);
+      console.log('join');
+    } else {
+      setJoined(true);
+      console.log('leave');
+    }
+  };
+
   return (
     <Container width={{ md: '60vw' }}>
       <Flex pt={4} px={1} alignItems="center">
@@ -44,7 +57,7 @@ const Group = () => {
           mentor, tutor, or coach in youth programs.
         </Text>
 
-        <Flex alignItems="center" mt={6}>
+        <Flex alignItems="center" my={4}>
           <GroupAvatar />
           <Spacer />
           <Button
@@ -54,8 +67,9 @@ const Group = () => {
             px="12"
             fontSize="20"
             colorScheme="red"
+            onClick={joinGroup}
           >
-            Join
+            {joined ? 'Member' : 'Join'}
           </Button>
         </Flex>
       </Box>
@@ -120,7 +134,7 @@ const Group = () => {
                 />
               ))}
             </Grid>
-            <MessageBar />
+            {joined ? <MessageBar /> : null}
           </TabPanel>
         </TabPanels>
       </Tabs>
