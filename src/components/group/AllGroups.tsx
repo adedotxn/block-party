@@ -17,10 +17,68 @@ const AllGroups = () => {
     overflowX: 'scroll',
     placeItems: 'center',
   };
+
+  const defaultGroups = [
+    { name: 'Youth Mentors' },
+    {
+      name: '🎨 Crafters',
+    },
+    {
+      name: '📚 Book Worms',
+    },
+    {
+      name: '⚽️ Footballers',
+    },
+    {
+      name: '🎵 Music Lovers',
+    },
+    {
+      name: '🌿 Green Thumbs',
+    },
+    {
+      name: '🍳 Foodies',
+    },
+    {
+      name: '🎮 Game Warriors',
+    },
+    {
+      name: '🏋️  Fitness Warriors',
+    },
+    {
+      name: '🎥 Popcorn Munchers',
+    },
+    {
+      name: '🐶 Dogs Lovers',
+    },
+    {
+      name: '🐈 Cats Lovers',
+    },
+    {
+      name: '🚴 Cycling Fanatics',
+    },
+    {
+      name: '🧘 Zen Seekers',
+    },
+    {
+      name: '📸 Shutterbugs',
+    },
+    {
+      name: '🎲 Boardgame Guild',
+    },
+    {
+      name: '🤝 Social Butterflies',
+    },
+    {
+      name: '🏞️ Outdoor Explorers',
+    },
+    {
+      name: '💃 Rhythm Rebels',
+    },
+  ];
   return (
     <section style={{ ...sliderStyle }}>
       <div style={{ display: 'flex', gap: '1rem' }}>
-        {[0, 1, 2, 3, 4].map((_, index) => (
+        {defaultGroups.map((group, index) => (
           <Card
             bg="blackAlpha.500"
             width={{ base: '90vw', md: '40vw' }}
@@ -37,12 +95,12 @@ const AllGroups = () => {
                   color="blackAlpha.700"
                   fontWeight="semibold"
                 >
-                  <Text>Youth Mentors</Text>
+                  <Text pb={3}>{group.name}</Text>
                   <GroupAvatar />
                 </Box>
                 <Spacer />
 
-                <Link as={NextLink} href="/groups/1">
+                <Link as={NextLink} href={`/groups/${index}`}>
                   <ChevronRightIcon
                     boxSize={10}
                     bg="red.2"

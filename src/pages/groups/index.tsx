@@ -51,7 +51,7 @@ const Groups = () => {
                   fontWeight="bold"
                   lineHeight="1.1"
                   fontSize="lg"
-                  width="24ch"
+                  width="22ch"
                 >
                   Help young people in the community in our next career sharing
                   event

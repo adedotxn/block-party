@@ -22,7 +22,20 @@ const theme = extendTheme({
   },
 });
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, ...appProps }: AppProps) {
+  const pathname = appProps.router.pathname;
+
+  if (
+    pathname.includes('invite') ||
+    pathname === 'invite' ||
+    pathname === '/'
+  ) {
+    return (
+      <ChakraProvider theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    );
+  }
   return (
     <ChakraProvider theme={theme}>
       <Layout>
