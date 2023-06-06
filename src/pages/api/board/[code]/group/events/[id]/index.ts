@@ -2,6 +2,7 @@ import { createEvent } from '@/utils/api/event';
 import { getSpecificGroupWithId } from '@/utils/api/groups';
 import { ResponseInterface } from '@/utils/interface';
 import { DocumentData } from 'firebase/firestore';
+import { nanoid } from 'nanoid';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface Data extends ResponseInterface {
@@ -32,7 +33,12 @@ export default async function handler(
 
   if (req.method === 'POST') {
     const { eventName, eventDate, userId } = req.body;
-    const event = { name: eventName, date: eventDate, organiser: userId };
+    const event = {
+      id: nanoid(),
+      name: eventName,
+      date: eventDate,
+      organiser: userId,
+    };
     const group = { id: groupId };
     const eventCreate = await createEvent(boardCode, group, event);
 
@@ -45,5 +51,9 @@ export default async function handler(
         .status(400)
         .json({ status: 'error', message: eventCreate?.message });
     }
+  }
+
+  if (req.method === 'DELETE') {
+    console.log(req.body);
   }
 }

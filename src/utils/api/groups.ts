@@ -226,8 +226,8 @@ export const createGroup = async (
         adminId: groupDetails.adminId,
         id: groupId,
         members: [],
-        allPosts: [],
         description: groupDetails.description,
+        events: [],
       };
       await addDoc(groupRef, newGroup);
       return {
