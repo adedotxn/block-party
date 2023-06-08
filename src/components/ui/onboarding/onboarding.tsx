@@ -36,69 +36,70 @@ const Onboarding = () => {
   }; */
 
   return (
-  <Container width={{ md: '60vw' }}>
-  <Stepper index={step} colorScheme="teal">
-    <Step key="Step 1" />
-    <Step key="Step 2" />
-    <Step key="Step 3" />
-    <Step key="Step 4" />
-    <Step key="Step 5" />
-    <Step key="Step 6" />
-  </Stepper>
-  <Box
-    display="flex"
-    alignItems="center"
-    justifyContent="center"
-    minHeight="100vh" // Change from h to minHeight
-    width="100%"
-  >
-    <Box maxWidth="90%" width="100%"> {/* Added width="100%" */}
-      {step === 1 && (
-        <Stack spacing={4}>
-          <Step1 handler={handleNext} />
-        </Stack>
-      )}
-      {step === 2 && (
-        <Stack spacing={4}>
-          <Step2 />
-          <Button
-            bg="#FF0000"
-            color="#FFFFFF"
-            width="100%"
-            height="44px"
-            borderRadius="33px"
-            mt={4}
-            onClick={handleNext}
-          >
-            Next
-          </Button>
-        </Stack>
-      )}
-      {step === 3 && (
-        <Stack spacing={4}>
-          <Step3
-            fullName={fullName}
-            username={username}
-            setUsername={setUsername}
-            setFullName={setFullName}
-            handleNext={handleNext}
-          />
-        </Stack>
-      )}
-      {step === 4 && (
-        <Stack spacing={4}>
-          <Step4
-            submitHandler={handleSubmit}
-            user={fullName}
-            value={interests}
-            onChange={handleInterestsChange}
-          />
-        </Stack>
-      )}
-    </Box>
-  </Box>
-</Container>
-
+    <Container width={{ md: '60vw' }}>
+      <Stepper index={step} colorScheme="teal">
+        <Step key="Step 1" />
+        <Step key="Step 2" />
+        <Step key="Step 3" />
+        <Step key="Step 4" />
+        <Step key="Step 5" />
+        <Step key="Step 6" />
+      </Stepper>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        minHeight="100vh" // Change from h to minHeight
+        width="100%"
+      >
+        <Box maxWidth="90%" width="100%">
+          {' '}
+          {/* Added width="100%" */}
+          {step === 1 && (
+            <Stack spacing={4}>
+              <Step1 handler={handleNext} />
+            </Stack>
+          )}
+          {step === 2 && (
+            <Stack spacing={4}>
+              <Step2 />
+              <Button
+                bg="#FF0000"
+                color="#FFFFFF"
+                width="100%"
+                height="44px"
+                borderRadius="33px"
+                mt={4}
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            </Stack>
+          )}
+          {step === 3 && (
+            <Stack spacing={4}>
+              <Step3
+                fullName={fullName}
+                username={username}
+                setUsername={setUsername}
+                setFullName={setFullName}
+                handleNext={handleNext}
+              />
+            </Stack>
+          )}
+          {step === 4 && (
+            <Stack spacing={4}>
+              <Step4
+                submitHandler={handleSubmit}
+                user={fullName}
+                value={interests}
+                onChange={handleInterestsChange}
+              />
+            </Stack>
+          )}
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
