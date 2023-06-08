@@ -23,11 +23,13 @@ const FooterBar = () => {
           <BoardIcon boxSize={8} />
         </Link>
 
-        <StarIcon boxSize={8} />
+        <Link as={NextLink} href="/groups">
+          <StarIcon boxSize={8} />
+        </Link>
 
         <AddPostIcon boxSize={8} />
 
-        <Link as={NextLink} href="/groups">
+        <Link as={NextLink} href="/interests-volunteer">
           <HeartIcon boxSize={7} />
         </Link>
 

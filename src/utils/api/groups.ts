@@ -226,8 +226,8 @@ export const createGroup = async (
         adminId: groupDetails.adminId,
         id: groupId,
         members: [],
-        allPosts: [],
         description: groupDetails.description,
+        events: [],
       };
       await addDoc(groupRef, newGroup);
       return {
@@ -273,7 +273,8 @@ export const getGroups = async (boardCode: string) => {
     }
   }
 };
-const getGroupRef = async (boardCode: string, id: string) => {
+
+export const getGroupRef = async (boardCode: string, id: string) => {
   const boardsRef = collection(db, 'boards');
   const q = query(boardsRef, where('boardCode', '==', boardCode));
   const querySnapshot = await getDocs(q);
