@@ -35,9 +35,9 @@ export const createUser = async (
       userId,
       fullName: user.fullName,
       username: user.username,
-      interests: user.interests,
+      interests: user.interests /* 
       profilePic: user.profilePic,
-      areaOfResidence: user.areaOfResidence,
+      areaOfResidence: user.areaOfResidence, */,
       boards: [], //the board name
       groups: [],
       allPosts: [],

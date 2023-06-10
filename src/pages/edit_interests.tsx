@@ -12,13 +12,15 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useMemo } from 'react';
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useMemo, useState } from 'react';
 
 type InterestsCheckboxGroupProps = {
   user: string;
   value: string[];
   onChange: (selectedOptions: string[]) => void;
-  handleNext: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  submitHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const interestsOptions: { title: string; imageSrc: string }[] = [
@@ -40,7 +42,7 @@ function InterestsCheckboxGroup({
   user,
   value,
   onChange,
-  handleNext,
+  submitHandler,
 }: InterestsCheckboxGroupProps) {
   const disabledOptions = useMemo(
     () => (value.length === 6 ? new Set(value) : new Set()),
@@ -131,7 +133,7 @@ function InterestsCheckboxGroup({
           height="44px"
           borderRadius="33px"
           mt={4}
-          onClick={(e) => handleNext(e)}
+          onClick={() => {}}
         >
           Let&apos;s do it!
         </Button>
@@ -140,4 +142,28 @@ function InterestsCheckboxGroup({
   );
 }
 
-export default InterestsCheckboxGroup;
+const EditInterestPage: NextPage = () => {
+  const router = useRouter();
+  const [fullName, setFullName] = useState('');
+  const [username, setUsername] = useState('');
+  const [interests, setInterests] = useState([]);
+
+  const handleInterestsChange = (selectedOptions: any) => {
+    if (selectedOptions.length <= 6) {
+      setInterests(selectedOptions);
+    }
+  };
+
+  return (
+    <Flex padding={5}>
+      <InterestsCheckboxGroup
+        submitHandler={handleInterestsChange}
+        user={fullName}
+        value={interests}
+        onChange={handleInterestsChange}
+      />
+    </Flex>
+  );
+};
+
+export default EditInterestPage;

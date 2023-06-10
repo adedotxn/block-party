@@ -12,9 +12,11 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
       alignItems="center"
       justifyContent="center"
       direction="column"
-      height="100vh" // Set the height to full viewport height
+      height="100vh"
+      width={'100%'}
+      bg={'#FCA311'}
     >
-      <Box maxWidth="90%">
+      <Box>
         {' '}
         {/* Limit the content width to 90% of the viewport */}
         <Flex direction="column" align="center" gap={10}>
@@ -24,12 +26,12 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
             align="center"
             justify="center"
             my="30"
-            bg="#003566"
             w="100%" // Set the width to 100% of the container
             maxWidth="247px" // Set the maximum width
             borderRadius="9px"
             padding="10px"
             gap={'10px'}
+            background="#FFFFFF"
           >
             <Avatar
               src="https://unsplash.com/photos/LyJAo9uwIfU/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTJ8fGtpbmclMjBjaGFybGVzfGVufDB8fHx8MTY4NTM1MDM3MHww&force=true"
@@ -40,7 +42,7 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
               fontSize="12px"
               lineHeight="15px"
               letterSpacing="-0.02em"
-              color="#FFFFFF"
+              color="#CC2900"
             >
               King Charles Street
             </Text>
@@ -49,7 +51,7 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
               fontSize="16px"
               lineHeight="15px"
               letterSpacing="-0.03em"
-              color="#FFFFFF"
+              color="#3D3D3E"
               textAlign="center"
             >
               You&apos;ve been invited to join a block party.
@@ -57,13 +59,13 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
             <Button
               w="109px"
               h="28px"
-              bg="#D9D9D9"
+              bg="#FCA311"
               borderRadius="38px"
               fontWeight={700}
               fontSize="12px"
               lineHeight="15px"
               letterSpacing="-0.02em"
-              color="#FF0000"
+              color="#FFFF"
               textAlign="center"
               onClick={handler}
             >
