@@ -34,9 +34,9 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
 
       if (response.ok) {
         const data = await response.json();
-        // Handle success, e.g., redirect to a success page
+
         console.log(data);
-        localStorage.setItem('loggedinuser', username); //used to retrieve user later
+        localStorage.setItem('loggedinuser', username);
         router.push('/profile');
       } else {
         console.error('Error:', response.statusText);
