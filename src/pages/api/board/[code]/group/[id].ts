@@ -18,7 +18,6 @@ export default async function handler(
   // Get specific group details
   if (req.method === 'GET') {
     const response = await getSpecificGroupWithId(id, boardCode);
-    console.log({ response });
 
     if (response?.status === 'success') {
       const data = response.data;

@@ -63,7 +63,7 @@ export const getGroupPosts = async (boardCode: string, groupId: string) => {
       const snapshot = await getDocs(allPostsCollectionRef);
       if (snapshot.empty) {
         console.log('No matching document');
-        return { status: 'error', message: 'No posts in group yet' };
+        return { status: 'success', data: [] };
       } else {
         const posts = snapshot.docs.map((doc) => doc.data());
         return { status: 'success', data: posts };

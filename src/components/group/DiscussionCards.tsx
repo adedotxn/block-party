@@ -12,7 +12,7 @@ const DiscussionCards = ({
   text?: string;
 }) => {
   return (
-    <Flex>
+    <Flex fontFamily="productSans">
       <Avatar name={name} border="2px" size="md" />
       <Spacer />
       <Box
