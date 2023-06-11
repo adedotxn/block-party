@@ -15,6 +15,7 @@ interface Data extends ResponseInterface {
     name: string;
     facilitator: string;
   };
+  userId?: string;
 }
 
 export default async function handler(
@@ -80,7 +81,11 @@ export default async function handler(
             await addUserToBoard(user, code);
             return res
               .status(200)
-              .json({ status: 'success', message: 'User Added to Board' });
+              .json({
+                status: 'success',
+                message: 'User Added to Board',
+                userId: response?.userId,
+              });
           }
         }
       } catch (error) {

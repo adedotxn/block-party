@@ -3,19 +3,20 @@ export interface ResponseInterface {
 }
 
 export interface GroupInterface {
-  name: string;
+  allPosts: any[];
+  description: string;
+  members: any[];
+  events: Event[];
   id: string;
-  allPosts: unknown[];
-  members: string[];
+  name: string;
+  adminId: string;
 }
 
-export interface GroupData {
-  data: {
-    id: string;
-    allPosts: string[];
-    adminId: string;
-    members: string[];
-    description: string;
-    name: string;
-  };
+export interface Event {
+  name: string;
+  id: string;
+  organiser: string;
+  date: string;
+  description?: string;
+  time: string;
 }

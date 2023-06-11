@@ -20,7 +20,6 @@ export type BoardType =
       boardCode: string;
       members: string[];
       boardId: string;
-      allPosts: unknown[];
     }
   | undefined;
 
@@ -40,7 +39,6 @@ export const createBoard = async (
       boardCode,
       facilitator: { username: facilitator.username, id: facilitator.id },
       members: [],
-      allPosts: [],
       createdAt: currentDate,
     };
     const docRef = await addDoc(boardRef, newBoard);
