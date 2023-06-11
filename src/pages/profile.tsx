@@ -25,7 +25,7 @@ const ProfilePage: NextPage = () => {
   useEffect(() => {
     const username = localStorage.getItem('loggedinuser');
     const fetchUser = async () => {
-      const response = await fetch(`/api/user/getUser?username=${username}`);
+      const response = await fetch(`/user/id/${username}`);
       const data = await response.json();
 
       if (response.ok) {

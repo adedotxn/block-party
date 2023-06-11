@@ -24,7 +24,7 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
     const role = 'member';
 
     try {
-      const response = await fetch('/api/user/createUser', {
+      const response = await fetch('/api/board/join/P15Ry1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
