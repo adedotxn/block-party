@@ -1,10 +1,11 @@
 import { arrayUnion, updateDoc } from 'firebase/firestore';
+import { Event } from '../interface';
 import { getGroupRef } from './groups';
 
 export const createEvent = async (
   boardCode: string,
   group: { id: string },
-  event: { id: string; name: string; date: string; organiser: string }
+  event: Event
 ) => {
   const groupRef = await getGroupRef(boardCode, group.id);
   if (groupRef.status === 'error')

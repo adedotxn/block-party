@@ -1,8 +1,16 @@
+import { productSans, samsungSans } from '@/components/ui/fonts';
 import Layout from '@/components/ui/layout';
 import '@/styles/globals.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
+
+const queryClient = new QueryClient();
 const theme = extendTheme({
+  fonts: {
+    samsungSharpSans: samsungSans.style.fontFamily,
+    productSans: productSans.style.fontFamily,
+  },
   colors: {
     red: {
       1: '#FF1C1C',
@@ -32,15 +40,19 @@ function App({ Component, pageProps, ...appProps }: AppProps) {
   ) {
     return (
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
       </ChakraProvider>
     );
   }
   return (
     <ChakraProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </QueryClientProvider>
     </ChakraProvider>
   );
 }

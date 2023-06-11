@@ -1,7 +1,8 @@
+import { Event } from '@/utils/interface';
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 import Calender from '../ui/calender';
 
-const Events = () => {
+const Events = ({ event }: { event: Event }) => {
   return (
     <Flex
       borderRadius="10px"
@@ -10,14 +11,21 @@ const Events = () => {
       px="5"
       bg="blackAlpha.400"
     >
-      <Calender />
-      <Spacer />
       <Box width="20ch">
-        <Text>7:00PM GMT</Text>
         <Text fontWeight="bold" lineHeight="1.1" fontSize="lg">
-          Help young people in the community in our next career sharing event
+          {event.name}
+        </Text>
+        {event.description ? (
+          <Text fontWeight="semibold" fontSize="lg">
+            {event.description}{' '}
+          </Text>
+        ) : null}
+        <Text pt={4} fontWeight="semibold" color="red.3">
+          {event.time}
         </Text>
       </Box>
+      <Spacer />
+      <Calender />
     </Flex>
   );
 };
