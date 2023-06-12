@@ -27,7 +27,6 @@ const ProfilePage: NextPage = () => {
     const fetchUser = async () => {
       const response = await fetch(`/user/id/${username}`);
       const data = await response.json();
-
       if (response.ok) {
         console.log(data);
         setUser(data);

@@ -21,7 +21,6 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
       fullName,
       interests,
     };
-    const role = 'member';
 
     try {
       const response = await fetch('/api/board/join/P15Ry1', {
@@ -29,7 +28,7 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user, role }),
+        body: JSON.stringify(user),
       });
 
       if (response.ok) {
@@ -37,7 +36,7 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
 
         console.log(data);
         localStorage.setItem('loggedinuser', username);
-        router.push('/profile');
+        router.push('/board/P15Ry1/group');
       } else {
         console.error('Error:', response.statusText);
       }
