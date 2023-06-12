@@ -54,8 +54,14 @@ const Groups = () => {
 
   return (
     <Container p="1rem">
-      <Flex>
-        <Heading as="h1" size="lg" fontFamily="samsungSharpSans">
+      <Flex pt={3} px={3}>
+        <Heading
+          as="h1"
+          size="lg"
+          fontFamily="samsungSharpSans"
+          color="red.3"
+          fontWeight="bold"
+        >
           My Group
         </Heading>
         <Spacer />

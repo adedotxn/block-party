@@ -36,6 +36,7 @@ const AllGroups = ({
                   backgroundImage="/images/Youth_Mentor_Big.png"
                   backgroundSize="cover"
                   width={{ base: '90vw', md: '40vw' }}
+                  height="60vh"
                   mt={5}
                   display="grid"
                   borderRadius="15px"
@@ -44,27 +45,17 @@ const AllGroups = ({
                   }
                 >
                   <CardBody mt="40vh">
-                    <Flex alignItems="center">
-                      <Box color="blackAlpha.700" fontWeight="semibold">
-                        <Text color="white" fontSize="30px" pb={3}>
-                          {group.name}
-                        </Text>
-                        <GroupAvatar />
-                      </Box>
-                      <Spacer />
-
-                      {/* <Link
-                      as={NextLink}
-                      href={`/board/${boardCode}/group/${group.id}`}
-                    >
-                      <ChevronRightIcon
-                        boxSize={10}
-                        bg="red.2"
+                    <Grid>
+                      <Text
                         color="white"
-                        borderRadius="full"
-                      />
-                    </Link> */}
-                    </Flex>
+                        fontSize="30px"
+                        pb={3}
+                        fontWeight="semibold"
+                      >
+                        {group.name}
+                      </Text>
+                      <GroupAvatar />
+                    </Grid>
                   </CardBody>
                 </Card>
                 <Flex gap="1rem" py={7}>

@@ -1,5 +1,6 @@
 import DiscussionCards from '@/components/group/DiscussionCards';
 import GroupAvatar from '@/components/group/GroupAvatar';
+import JoinBtn from '@/components/group/JoinBtn';
 import Coordinator from '@/components/group/coordinator';
 import Events from '@/components/group/events';
 import MessageBar from '@/components/group/messagebar';
@@ -80,7 +81,7 @@ const Group = () => {
       <Box
         backgroundImage="/images/Youth_Mentor_2.png"
         backgroundSize="cover"
-        height="40vh"
+        height="45vh"
         borderBottomRadius="1.3rem"
         width={{ base: '100vw', md: '40vw' }}
       >
@@ -102,22 +103,18 @@ const Group = () => {
         <Heading as="h1" size="xl" color="red.2" fontFamily="samsungSharpSans">
           {groupDetails.name}
         </Heading>
-        <Text>{groupDetails.description}</Text>
+        {/* <Text>{groupDetails.description}</Text> */}
+        <Text fontFamily="productSans" lineHeight={1} fontSize="md">
+          {' '}
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel
+          reiciendis sint, ipsum nobis accusantium eum accusamus iste recusandae
+          possimus expedita?{' '}
+        </Text>
 
         <Flex alignItems="center" my={4}>
           <GroupAvatar />
           <Spacer />
-          <Button
-            bg="red.3"
-            color="white"
-            borderRadius="33"
-            px="12"
-            fontSize="lg"
-            colorScheme="red"
-            onClick={joinGroup}
-          >
-            {joined ? 'Member' : 'Join'}
-          </Button>
+          <JoinBtn joined={joined} />
         </Flex>
       </Box>
       <Divider bg="blackAlpha.900" height={0.4} />
