@@ -1,6 +1,6 @@
 import { Flex, Spinner, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 interface Step4Props {
   username: string;
@@ -11,16 +11,13 @@ interface Step4Props {
 const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
   const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleCreateUser = useCallback(async () => {
-    setIsLoading(true);
-
     const user = {
       username,
       fullName,
       interests,
     };
+    //const userString = JSON.stringify(user);
 
     try {
       const response = await fetch('/api/board/join/P15Ry1', {
@@ -32,19 +29,15 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-
-        console.log(data);
-        localStorage.setItem('loggedinuser', username);
-        router.push('/board/P15Ry1/group');
+        await response.json();
+        localStorage.setItem('loggedinuser', user.username);
+        router.push('/board/P15Ry1/groups');
       } else {
         console.error('Error:', response.statusText);
       }
     } catch (error: any) {
       console.error('Error:', error.message);
     }
-
-    setIsLoading(false);
   }, [username, fullName, interests, router]);
 
   useEffect(() => {

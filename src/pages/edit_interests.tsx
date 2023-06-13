@@ -68,7 +68,7 @@ function InterestsCheckboxGroup({
         color="#003566"
         textAlign="center"
       >
-        Hi, {user}! <br /> What are you interested in?
+        Hi, {user}! <br /> u are you interested in?
       </Text>
       <FormControl textAlign="center">
         <CheckboxGroup
@@ -135,7 +135,7 @@ function InterestsCheckboxGroup({
           mt={4}
           onClick={() => {}}
         >
-          Let&apos;s do it!
+          Update
         </Button>
       </FormControl>
     </Flex>
