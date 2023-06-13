@@ -1,18 +1,24 @@
 import { Box, Text } from '@chakra-ui/react';
 
-const Calender = () => {
+const Calender = ({ date }: { date: string }) => {
+  const _date = date.split('-');
+  const year = _date[0];
+  const month = 'June';
+  const day = _date[2];
   return (
-    <Box display="grid" py="1rem">
+    <Box display="grid" py="1rem" width="84px" fontFamily="samsungSharpSans">
       <Text
         align="center"
         bg="red.1"
         color="white"
-        p={1}
-        width="84px"
-        borderTopRadius="5px"
+        py={1}
+        // height="1.5rem"
+        borderTopRadius="10px"
+        fontSize="15px"
         fontWeight="semibold"
+        textTransform="uppercase"
       >
-        JUNE
+        {month}
       </Text>
 
       <Text
@@ -20,12 +26,11 @@ const Calender = () => {
         fontSize="5xl"
         fontWeight="extrabold"
         bg="gray.200"
-        px={1}
-        py=".2rem"
-        width="84px"
-        borderBottomRadius="5px"
+        height="61px"
+        borderBottomRadius="10px"
+        textAlign="center"
       >
-        23
+        {day}
       </Text>
     </Box>
   );

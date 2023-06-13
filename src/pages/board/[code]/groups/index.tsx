@@ -46,16 +46,16 @@ const Groups = () => {
 
   const groups: GroupInterface[] = data.data;
 
-  const sliderStyle: any = {
-    display: 'grid',
-    overflowX: 'scroll',
-    placeItems: 'center',
-  };
-
   return (
     <Container p="1rem">
-      <Flex>
-        <Heading as="h1" size="lg" fontFamily="samsungSharpSans">
+      <Flex pt={3} px={3}>
+        <Heading
+          as="h1"
+          size="lg"
+          fontFamily="samsungSharpSans"
+          color="red.3"
+          fontWeight="bold"
+        >
           My Group
         </Heading>
         <Spacer />
@@ -65,42 +65,6 @@ const Groups = () => {
       </Flex>
 
       <AllGroups groups={groups} boardCode={boardCode} />
-
-      {/* <div
-        style={{
-          marginTop: '2rem',
-          paddingBottom: '4rem',
-          ...sliderStyle,
-        }}
-      >
-        <Flex gap="1rem">
-          {[0, 1, 2, 3, 4].map((_, index) => (
-            <Box
-              key={index}
-              bg="blackAlpha.500"
-              width={{ base: '90vw', md: '40vw' }}
-              color="blackAlpha.700"
-              borderRadius="10px"
-              py={1}
-              px={4}
-            >
-              <Flex alignItems="center">
-                <Text
-                  fontWeight="bold"
-                  lineHeight="1.1"
-                  fontSize="lg"
-                  width="22ch"
-                >
-                  Help young people in the community in our next career sharing
-                  event
-                </Text>
-                <Spacer />
-                <Calender />
-              </Flex>
-            </Box>
-          ))}
-        </Flex>
-      </div> */}
     </Container>
   );
 };

@@ -13,10 +13,15 @@ export interface GroupInterface {
 }
 
 export interface Event {
-  name: string;
   id: string;
-  organiser: string;
-  date: string;
+  title: string;
   description?: string;
-  time: string;
+  date: string;
+  startTime: string;
+  endTime?: string;
+  venue: string;
+  organiser: {
+    name: string;
+    id: string;
+  };
 }

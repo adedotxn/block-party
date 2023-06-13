@@ -32,15 +32,19 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { eventName, eventDate, userId, description, time } = req.body;
+    const { title, date, description, startTime, endTime, venue, organiser } =
+      req.body;
     const event = {
       id: nanoid(),
-      name: eventName,
-      date: eventDate,
-      organiser: userId,
+      title,
+      date: date,
+      organiser,
       description,
-      time,
+      startTime,
+      endTime,
+      venue,
     };
+
     const group = { id: groupId };
     const eventCreate = await createEvent(boardCode, group, event);
 

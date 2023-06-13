@@ -35,7 +35,8 @@ const AllGroups = ({
                 <Card
                   backgroundImage="/images/Youth_Mentor_Big.png"
                   backgroundSize="cover"
-                  width={{ base: '90vw', md: '40vw' }}
+                  width={{ base: '90vw', md: '30vw' }}
+                  height="60vh"
                   mt={5}
                   display="grid"
                   borderRadius="15px"
@@ -43,67 +44,88 @@ const AllGroups = ({
                     router.push(`/board/${boardCode}/group/${group.id}`)
                   }
                 >
-                  <CardBody mt="40vh">
-                    <Flex alignItems="center">
-                      <Box color="blackAlpha.700" fontWeight="semibold">
-                        <Text color="white" fontSize="30px" pb={3}>
-                          {group.name}
-                        </Text>
-                        <GroupAvatar />
-                      </Box>
-                      <Spacer />
-
-                      {/* <Link
-                      as={NextLink}
-                      href={`/board/${boardCode}/group/${group.id}`}
-                    >
-                      <ChevronRightIcon
-                        boxSize={10}
-                        bg="red.2"
+                  <CardBody mt={{ base: '40vh', md: '35vh' }}>
+                    <Grid>
+                      <Text
                         color="white"
-                        borderRadius="full"
-                      />
-                    </Link> */}
-                    </Flex>
+                        fontSize={{ base: '30px', md: '26px' }}
+                        pb={{ base: 3, md: 1 }}
+                        fontWeight="semibold"
+                      >
+                        {group.name}
+                      </Text>
+                      <GroupAvatar />
+                    </Grid>
                   </CardBody>
                 </Card>
                 <Flex gap="1rem" py={7}>
                   <Box
                     bg="blackAlpha.500"
-                    width={{ base: '90vw', md: '40vw' }}
-                    color="blackAlpha.700"
                     borderRadius="10px"
-                    py={1}
-                    px={4}
+                    width={{ base: '90vw', md: '30vw' }}
                   >
                     {group.events.length === 0 ? (
-                      <Grid height="139px" placeItems="center">
+                      <Grid
+                        borderRadius="10px"
+                        py={1}
+                        px={4}
+                        height="120px"
+                        placeItems="center"
+                      >
                         <Text fontWeight="semibold" fontSize="lg">
                           No Events Planned Yet!
                         </Text>
                       </Grid>
                     ) : (
-                      <Flex alignItems="center">
-                        <Grid>
-                          <Text
-                            fontWeight="bold"
-                            lineHeight="1.1"
-                            fontSize="xl"
-                          >
-                            {group.events[0].name}
-                          </Text>
-                          {group.events[0].description ? (
-                            <Text fontWeight="semibold" fontSize="lg">
+                      <>
+                        <Flex alignItems="center" px={6} py={2}>
+                          <Box width="20ch" fontFamily="productSans">
+                            <Text
+                              fontWeight="bold"
+                              lineHeight="1.1"
+                              fontSize="2xl"
+                            >
+                              {group.events[0].title}
+                            </Text>
+                            <Text
+                              pt={1}
+                              fontWeight="semibold"
+                              fontSize="xl"
+                              color="#3D3E3E"
+                              lineHeight="1.2"
+                            >
                               {group.events[0].description}{' '}
                             </Text>
-                          ) : null}
-                          <Text pt={4} fontWeight="semibold" color="red.3">
-                            {group.events[0].time}
-                          </Text>
-                        </Grid>
-                        <Spacer />
-                        <Calender />
-                      </Flex>
+                            <Flex
+                              pt={1}
+                              alignItems="center"
+                              fontSize="lg"
+                              gap={1}
+                            >
+                              <Text fontWeight="bold" color="red.3">
+                                {group.events[0].organiser.name}
+                              </Text>
+                              <Box
+                                width={1}
+                                height={1}
+                                rounded="full"
+                                bg="red.3"
+                              />
+                              <Text
+                                fontWeight="light"
+                                fontSize="lg"
+                                color="red.3"
+                              >
+                                {group.events[0].startTime
+                                  ? group.events[0].startTime
+                                  : null}
+                              </Text>
+                            </Flex>
+                          </Box>
+                          <Spacer />
+                          <Calender date={group.events[0].date} />
+                        </Flex>
+                      </>
                     )}
                   </Box>
                 </Flex>
