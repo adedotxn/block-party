@@ -1,7 +1,7 @@
+import CreateEvent from '@/components/group/CreateEvent';
 import DiscussionCards from '@/components/group/DiscussionCards';
 import GroupAvatar from '@/components/group/GroupAvatar';
 import JoinBtn from '@/components/group/JoinBtn';
-import Coordinator from '@/components/group/coordinator';
 import Events from '@/components/group/events';
 import MessageBar from '@/components/group/messagebar';
 import Loader from '@/components/ui/loader';
@@ -9,7 +9,6 @@ import { GroupInterface } from '@/utils/interface';
 import { ChevronLeftIcon, CloseIcon } from '@chakra-ui/icons';
 import {
   Box,
-  Button,
   Divider,
   Flex,
   Grid,
@@ -30,7 +29,7 @@ import { useState } from 'react';
 
 const Group = () => {
   const router = useRouter();
-  const boardCode = router.query.code;
+  const boardCode = router.query.code as string;
   const groupId = router.query.id;
 
   const { isLoading, isError, data, error } = useQuery({
@@ -77,132 +76,133 @@ const Group = () => {
   const groupDetails: GroupInterface = data.data;
 
   return (
-    <Box width={{ md: '60vw' }}>
-      <Box
-        backgroundImage="/images/Youth_Mentor_2.png"
-        backgroundSize="cover"
-        height="45vh"
-        borderBottomRadius="1.3rem"
-        width={{ base: '100vw', md: '40vw' }}
-      >
-        <Flex pt={4} px={2} alignItems="center">
-          <Link as={NextLink} href={`/board/${boardCode}/groups`}>
-            <ChevronLeftIcon
-              boxSize={8}
-              color="white"
-              onClick={() => router.push(`/board/${boardCode}/groups`)}
-            />
-          </Link>
+    <Box display="grid" placeItems="center">
+      <Box width={{ md: '40vw' }}>
+        <Box
+          backgroundImage="/images/Youth_Mentor_2.png"
+          backgroundSize="cover"
+          height="45vh"
+          borderBottomRadius="1.3rem"
+          width={{ base: '100vw', md: '40vw' }}
+        >
+          <Flex pt={4} px={2} alignItems="center">
+            <Link as={NextLink} href={`/board/${boardCode}/groups`}>
+              <ChevronLeftIcon
+                boxSize={8}
+                color="white"
+                onClick={() => router.push(`/board/${boardCode}/groups`)}
+              />
+            </Link>
 
-          <Spacer />
-          <CloseIcon color="white" />
-        </Flex>
-      </Box>
+            <Spacer />
+            <CloseIcon color="white" />
+          </Flex>
+        </Box>
 
-      <Box px={4} mb={2} mt={6}>
-        <Heading as="h1" size="xl" color="red.2" fontFamily="samsungSharpSans">
-          {groupDetails.name}
-        </Heading>
-        {/* <Text>{groupDetails.description}</Text> */}
-        <Text fontFamily="productSans" lineHeight={1} fontSize="md">
-          {' '}
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel
-          reiciendis sint, ipsum nobis accusantium eum accusamus iste recusandae
-          possimus expedita?{' '}
-        </Text>
-
-        <Flex alignItems="center" my={4}>
-          <GroupAvatar />
-          <Spacer />
-          <JoinBtn joined={joined} />
-        </Flex>
-      </Box>
-      <Divider bg="blackAlpha.900" height={0.4} />
-
-      {/* <Discussion /> */}
-
-      <Tabs
-        isFitted
-        display="grid"
-        placeItems="center"
-        pb="3rem"
-        variant="unstyled"
-        mt={8}
-      >
-        <TabList bg="#D9D9D9" borderRadius="41px" fontSize="18px">
-          <Tab
-            px={16}
-            py={2}
-            borderRadius="41px"
-            fontWeight="semibold"
-            fontSize="1.2rem"
-            _selected={{ color: 'white', bg: 'red.3' }}
+        <Box px={4} mb={2} mt={6}>
+          <Heading
+            as="h1"
+            size="xl"
+            color="red.2"
+            fontFamily="samsungSharpSans"
           >
-            Events
-          </Tab>
+            {groupDetails.name}
+          </Heading>
+          {/* <Text>{groupDetails.description}</Text> */}
+          <Text fontFamily="productSans" lineHeight={1} fontSize="md">
+            {' '}
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel
+            reiciendis sint, ipsum nobis accusantium eum accusamus iste
+            recusandae possimus expedita?{' '}
+          </Text>
 
-          <Tab
-            px={16}
-            py={2}
-            borderRadius="41px"
-            fontWeight="semibold"
-            fontSize="1.2rem"
-            _selected={{ color: 'white', bg: 'red.3' }}
-          >
-            Chat
-          </Tab>
-        </TabList>
+          <Flex alignItems="center" my={4}>
+            <GroupAvatar />
+            <Spacer />
+            <JoinBtn joined={joined} />
+          </Flex>
+        </Box>
+        <Divider bg="blackAlpha.900" height={0.4} />
 
-        <TabPanels>
-          {/** Events Panel */}
-          <TabPanel>
-            {groupDetails.events ? (
-              groupDetails.events.length === 0 ? (
-                <Text mt={6} fontSize="xl" fontWeight="bold" textAlign="center">
-                  There are no events yet
-                </Text>
-              ) : (
-                groupDetails.events.map((event, index) => (
-                  <Events key={index} event={event} />
-                ))
-              )
-            ) : null}
+        {/* <Discussion /> */}
 
-            <Grid placeItems="center" mt={4}>
-              <Button
-                px={16}
-                rounded="full"
-                colorScheme="red"
-                bg="red.3"
-                fontSize="lg"
-              >
-                Create Event
-              </Button>
-            </Grid>
+        <Tabs
+          isFitted
+          display="grid"
+          placeItems="center"
+          pb="3rem"
+          variant="unstyled"
+          mt={8}
+        >
+          <TabList bg="#D9D9D9" borderRadius="41px" fontSize="18px">
+            <Tab
+              px={16}
+              py={2}
+              borderRadius="41px"
+              fontWeight="semibold"
+              fontSize="1.2rem"
+              _selected={{ color: 'white', bg: 'red.3' }}
+            >
+              Events
+            </Tab>
 
-            <Divider mt="2rem" bg="blackAlpha.900" height={0.45} />
-            <Coordinator />
-          </TabPanel>
+            <Tab
+              px={16}
+              py={2}
+              borderRadius="41px"
+              fontWeight="semibold"
+              fontSize="1.2rem"
+              _selected={{ color: 'white', bg: 'red.3' }}
+            >
+              Chat
+            </Tab>
+          </TabList>
 
-          {/** Discussions Panel */}
-          <TabPanel>
-            <Grid mt={12} gap="2rem" pb={20}>
-              {[
-                { name: 'Philip Adewole', username: 'Philip The Great' },
-                { name: 'Sarah Wong', username: 'Sarah The Magneficent' },
-                { name: 'Assad', username: 'nottherealalanturing' },
-              ].map((post, index) => (
-                <DiscussionCards
-                  key={index}
-                  name={post.name}
-                  username={post.username}
-                />
-              ))}
-            </Grid>
-            {joined ? <MessageBar /> : null}
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+          <TabPanels>
+            {/** Events Panel */}
+            <TabPanel>
+              {groupDetails.events ? (
+                groupDetails.events.length === 0 ? (
+                  <Text
+                    mt={6}
+                    fontSize="xl"
+                    fontWeight="bold"
+                    textAlign="center"
+                  >
+                    There are no events yet
+                  </Text>
+                ) : (
+                  groupDetails.events.map((event, index) => (
+                    <Events key={index} event={event} />
+                  ))
+                )
+              ) : null}
+
+              <Grid placeItems="center" mt={4}>
+                <CreateEvent boardCode={boardCode} groupId={groupDetails.id} />
+              </Grid>
+            </TabPanel>
+
+            {/** Discussions Panel */}
+            <TabPanel>
+              <Grid mt={12} gap="2rem" pb={20}>
+                {[
+                  { name: 'Philip Adewole', username: 'Philip The Great' },
+                  { name: 'Sarah Wong', username: 'Sarah The Magneficent' },
+                  { name: 'Assad', username: 'nottherealalanturing' },
+                ].map((post, index) => (
+                  <DiscussionCards
+                    key={index}
+                    name={post.name}
+                    username={post.username}
+                  />
+                ))}
+              </Grid>
+              {joined ? <MessageBar /> : null}
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
     </Box>
   );
 };
