@@ -2,30 +2,37 @@ import { Event } from '@/utils/interface';
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 import Calender from '../ui/calender';
 
-const Events = ({ event }: { event: Event }) => {
+const Events = (props: { event: Event }) => {
+  const { event } = props;
+  console.log({ event });
   return (
     <Flex
       borderRadius="10px"
       alignItems="center"
       mt="1rem"
-      px="5"
+      px={6}
+      py={3}
       bg="blackAlpha.400"
     >
-      <Box width="20ch">
-        <Text fontWeight="bold" lineHeight="1.1" fontSize="lg">
-          {event.name}
+      <Box width="20ch" fontFamily="productSans">
+        <Text fontWeight="bold" lineHeight="1.1" fontSize="2xl">
+          {event.title}
         </Text>
-        {event.description ? (
-          <Text fontWeight="semibold" fontSize="lg">
-            {event.description}{' '}
-          </Text>
-        ) : null}
-        <Text pt={4} fontWeight="semibold" color="red.3">
-          {event.time}
+        <Text
+          pt={1}
+          fontWeight="semibold"
+          lineHeight="1.1"
+          fontSize="xl"
+          color="#3D3E3E"
+        >
+          {event.description}{' '}
+        </Text>
+        <Text pt={1} fontWeight="semibold" color="red.3" fontSize="lg">
+          {event.startTime ? event.startTime : null}
         </Text>
       </Box>
       <Spacer />
-      <Calender />
+      <Calender date={event.date} />
     </Flex>
   );
 };
