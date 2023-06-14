@@ -101,7 +101,7 @@ const UserPage: React.FC = () => {
               </Button>
             </Flex>
             <Grid
-              templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
+              templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }}
               gap={4}
               alignItems="center"
             >
@@ -117,7 +117,7 @@ const UserPage: React.FC = () => {
                     fontWeight={700}
                     letterSpacing="-0.02em"
                     color="#FFFFFF"
-                    width={{ base: '250px', md: '250px' }}
+                    width={{ base: '100px', md: '250px' }}
                     height={{ base: '23px', md: '33px' }}
                     display="flex"
                     justifyContent="center"
