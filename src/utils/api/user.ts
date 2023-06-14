@@ -5,6 +5,7 @@ import {
   collection,
   getDocs,
   query,
+  setDoc,
   updateDoc,
   where,
 } from 'firebase/firestore';
@@ -98,6 +99,25 @@ export const addBoardtoFacilitatorDoc = async (
     const doc = querySnapshot.docs[0];
     try {
       await updateDoc(doc.ref, { boards: arrayUnion(board) });
+      return { status: 'success' };
+    } catch (error) {
+      return { status: 'error', error };
+    }
+  }
+};
+
+export const updateUser = async (
+  userId: string,
+  user: { [key: string]: string }
+) => {
+  const userRef = collection(db, 'users');
+  const q = query(userRef, where('userId', '==', userId));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const doc = querySnapshot.docs[0];
+    try {
+      await setDoc(doc.ref, user);
       return { status: 'success' };
     } catch (error) {
       return { status: 'error', error };

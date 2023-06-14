@@ -1,4 +1,4 @@
-import { getUserWithId } from '@/utils/api/user';
+import { getUserWithId, updateUser } from '@/utils/api/user';
 import { ResponseInterface } from '@/utils/interface';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -26,7 +26,24 @@ export default async function handler(
     }
   }
 
-  if (req.method !== 'GET') {
+  // Update user details
+  if (req.method === 'PUT') {
+    const user = req.body;
+    const response = await updateUser(userId, user);
+
+    if (response?.status === 'success') {
+      return res.status(200).json({
+        status: 'success',
+        message: "Successfully Updated User's Data",
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ status: 'error', message: "Couldn't Update User" });
+    }
+  }
+
+  if (req.method !== 'GET' && req.method !== 'PUT') {
     return res.status(400).json({
       status: 'error',
       message:
