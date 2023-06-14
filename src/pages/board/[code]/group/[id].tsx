@@ -172,13 +172,13 @@ const Group = () => {
                     There are no events yet
                   </Text>
                 ) : (
-                  groupDetails.events.map((event, index) => (
-                    <Events key={index} event={event} />
-                  ))
+                  groupDetails.events
+                    .sort((a: any, b: any) => b - a)
+                    .map((event, index) => <Events key={index} event={event} />)
                 )
               ) : null}
 
-              <Grid placeItems="center" mt={4}>
+              <Grid placeItems="center" mt={6}>
                 <CreateEvent boardCode={boardCode} groupId={groupDetails.id} />
               </Grid>
             </TabPanel>

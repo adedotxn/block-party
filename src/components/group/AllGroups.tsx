@@ -77,55 +77,59 @@ const AllGroups = ({
                         </Text>
                       </Grid>
                     ) : (
-                      <>
-                        <Flex alignItems="center" px={6} py={2}>
-                          <Box width="20ch" fontFamily="productSans">
-                            <Text
-                              fontWeight="bold"
-                              lineHeight="1.1"
-                              fontSize="2xl"
-                            >
-                              {group.events[0].title}
+                      <Flex minHeight="120px" alignItems="center" px={6} py={2}>
+                        <Box width="20ch" fontFamily="productSans">
+                          <Text
+                            fontWeight="bold"
+                            lineHeight="1.1"
+                            fontSize="2xl"
+                          >
+                            {group.events[group.events.length - 1].title}
+                          </Text>
+                          <Text
+                            pt={1}
+                            fontWeight="semibold"
+                            fontSize="xl"
+                            color="#3D3E3E"
+                            lineHeight="1.2"
+                          >
+                            {group.events[group.events.length - 1].description}{' '}
+                          </Text>
+                          <Flex
+                            pt={1}
+                            alignItems="center"
+                            fontSize="lg"
+                            gap={1}
+                          >
+                            <Text fontWeight="bold" color="red.3">
+                              {
+                                group.events[group.events.length - 1].organiser
+                                  .name
+                              }
                             </Text>
+                            <Box
+                              width={1}
+                              height={1}
+                              rounded="full"
+                              bg="red.3"
+                            />
                             <Text
-                              pt={1}
-                              fontWeight="semibold"
-                              fontSize="xl"
-                              color="#3D3E3E"
-                              lineHeight="1.2"
-                            >
-                              {group.events[0].description}{' '}
-                            </Text>
-                            <Flex
-                              pt={1}
-                              alignItems="center"
+                              fontWeight="light"
                               fontSize="lg"
-                              gap={1}
+                              color="red.3"
                             >
-                              <Text fontWeight="bold" color="red.3">
-                                {group.events[0].organiser.name}
-                              </Text>
-                              <Box
-                                width={1}
-                                height={1}
-                                rounded="full"
-                                bg="red.3"
-                              />
-                              <Text
-                                fontWeight="light"
-                                fontSize="lg"
-                                color="red.3"
-                              >
-                                {group.events[0].startTime
-                                  ? group.events[0].startTime
-                                  : null}
-                              </Text>
-                            </Flex>
-                          </Box>
-                          <Spacer />
-                          <Calender date={group.events[0].date} />
-                        </Flex>
-                      </>
+                              {group.events[group.events.length - 1].startTime
+                                ? group.events[group.events.length - 1]
+                                    .startTime
+                                : null}
+                            </Text>
+                          </Flex>
+                        </Box>
+                        <Spacer />
+                        <Calender
+                          date={group.events[group.events.length - 1].date}
+                        />
+                      </Flex>
                     )}
                   </Box>
                 </Flex>

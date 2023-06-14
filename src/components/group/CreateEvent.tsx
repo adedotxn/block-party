@@ -66,7 +66,7 @@ const CreateEvent = ({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['group'] });
       queryClient.invalidateQueries({ queryKey: ['groups'] });
-      toast.success('Event has been created');
+      toast.success('Event Created!');
       setSubmitting(false);
       onClose();
     },
@@ -84,10 +84,12 @@ const CreateEvent = ({
         rounded="full"
         colorScheme="red"
         bg="red.3"
-        fontSize="lg"
+        fontSize="20px"
         onClick={onOpen}
+        width={{ base: '90vw', md: '30vw' }}
+        py={6}
       >
-        Create Event
+        New Event
       </Button>
 
       <Box display="grid" placeItems="center">

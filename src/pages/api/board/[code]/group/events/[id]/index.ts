@@ -43,6 +43,7 @@ export default async function handler(
       startTime,
       endTime,
       venue,
+      createdAt: new Date(),
     };
 
     const group = { id: groupId };
