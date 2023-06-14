@@ -1,5 +1,4 @@
-import { Box, Button, Container, Stack, Step, Stepper } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import { Box, Stack, Step, Stepper } from '@chakra-ui/react';
 import { useState } from 'react';
 import Step1 from './step1';
 import Step2 from './step2';
@@ -11,16 +10,9 @@ const Onboarding = () => {
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [interests, setInterests] = useState([]);
-  //const [volunteerActivities, setVolunteerActivities] = useState([]);
 
-  const router = useRouter();
   const handleNext = () => {
     setStep((prevStep) => prevStep + 1);
-  };
-
-  const handleSubmit = () => {
-    console.log({ fullName, username, interests });
-    router.push('/profile');
   };
 
   const handleInterestsChange = (selectedOptions: any) => {
@@ -29,14 +21,8 @@ const Onboarding = () => {
     }
   };
 
-  /*  const handleVolunteerActivitiesChange = (selectedOptions) => {
-    if (selectedOptions.length <= 6) {
-      setVolunteerActivities(selectedOptions);
-    }
-  }; */
-
   return (
-    <Container width={{ md: '60vw' }}>
+    <Box>
       <Stepper index={step} colorScheme="teal">
         <Step key="Step 1" />
         <Step key="Step 2" />
@@ -49,10 +35,12 @@ const Onboarding = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        h="100vh"
-        w="100%"
+        minHeight="100vh"
+        width="100%"
       >
-        <Box>
+        <Box maxWidth="100%" width="100%">
+          {' '}
+          {/* Added width="100%" */}
           {step === 1 && (
             <Stack spacing={4}>
               <Step1 handler={handleNext} />
@@ -60,23 +48,7 @@ const Onboarding = () => {
           )}
           {step === 2 && (
             <Stack spacing={4}>
-              <Step2 />
-              <Button
-                bg="#FF0000"
-                color="#FFFFFF"
-                width="100%"
-                height="44px"
-                borderRadius="33px"
-                mt={4}
-                onClick={handleNext}
-              >
-                Next
-              </Button>
-            </Stack>
-          )}
-          {step === 3 && (
-            <Stack spacing={4}>
-              <Step3
+              <Step2
                 fullName={fullName}
                 username={username}
                 setUsername={setUsername}
@@ -85,19 +57,28 @@ const Onboarding = () => {
               />
             </Stack>
           )}
-          {step === 4 && (
+          {step === 3 && (
             <Stack spacing={4}>
-              <Step4
-                submitHandler={handleSubmit}
+              <Step3
+                handleNext={handleNext}
                 user={fullName}
                 value={interests}
                 onChange={handleInterestsChange}
               />
             </Stack>
           )}
+          {step === 4 && (
+            <Stack spacing={4}>
+              <Step4
+                username={username}
+                fullName={fullName}
+                interests={interests}
+              />
+            </Stack>
+          )}
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 
