@@ -10,15 +10,9 @@ const Onboarding = () => {
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [interests, setInterests] = useState([]);
-  //const [volunteerActivities, setVolunteerActivities] = useState([]);
 
   const handleNext = () => {
     setStep((prevStep) => prevStep + 1);
-  };
-
-  const handleSubmit = () => {
-    console.log({ fullName, username, interests });
-    //router.push('/profile');
   };
 
   const handleInterestsChange = (selectedOptions: any) => {
@@ -26,12 +20,6 @@ const Onboarding = () => {
       setInterests(selectedOptions);
     }
   };
-
-  /*  const handleVolunteerActivitiesChange = (selectedOptions) => {
-    if (selectedOptions.length <= 6) {
-      setVolunteerActivities(selectedOptions);
-    }
-  }; */
 
   return (
     <Box>
