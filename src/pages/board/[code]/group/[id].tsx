@@ -200,7 +200,7 @@ const Group = () => {
                 ))}
               </Grid>
               {joined ? <MessageBar /> : null}
-              <ChatBar apiEndpoint="asdasd" />
+              <ChatBar boardCode={boardCode} groupId={groupDetails.id} />
             </TabPanel>
           </TabPanels>
         </Tabs>

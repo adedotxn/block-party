@@ -10,10 +10,11 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 
 type ChatBarProps = {
-  apiEndpoint: string;
+  boardCode: string;
+  groupId: string;
 };
 
-const ChatBar: React.FC<ChatBarProps> = ({ apiEndpoint }) => {
+const ChatBar: React.FC<ChatBarProps> = ({ boardCode, groupId }) => {
   const [message, setMessage] = useState('');
   const chatBarRef = useRef<HTMLDivElement>(null);
 
@@ -25,13 +26,16 @@ const ChatBar: React.FC<ChatBarProps> = ({ apiEndpoint }) => {
 
   const handleSendMessage = async () => {
     try {
-      const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      });
+      const response = await fetch(
+        `/board/${boardCode}/group/post/${groupId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message }),
+        }
+      );
 
       if (response.ok) {
         // Handle success
@@ -95,7 +99,7 @@ const ChatBar: React.FC<ChatBarProps> = ({ apiEndpoint }) => {
               aria-label="Send"
               size="sm"
               variant="ghost"
-              onClick={handleMessageChange}
+              onClick={handleSendMessage}
             >
               <Image
                 src="/icons/chatbtn.svg"
