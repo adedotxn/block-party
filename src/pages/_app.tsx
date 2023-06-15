@@ -21,7 +21,12 @@ const theme = extendTheme({
       1: '#0076A9',
     },
     grey: {
-      1: '#626262',
+      event: '#E8E8E8',
+      calender: '#F2F2F2',
+      tab: '#D9D9D9',
+    },
+    btn: {
+      yellow: '#FCA311',
     },
   },
 

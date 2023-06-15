@@ -20,9 +20,13 @@ import { toast } from 'sonner';
 const CreateEvent = ({
   groupId,
   boardCode,
+  organiserId,
+  organiserName,
 }: {
   groupId: string;
   boardCode: string;
+  organiserId: string;
+  organiserName: string;
 }) => {
   const queryClient = useQueryClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,8 +40,8 @@ const CreateEvent = ({
     description: '',
     venue: '',
     organiser: {
-      name: 'organiserName',
-      id: 'organiserId',
+      name: organiserName,
+      id: organiserId,
     },
   });
 

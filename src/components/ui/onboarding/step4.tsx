@@ -34,9 +34,11 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
         router.push('/board/P15Ry1/groups');
       } else {
         console.error('Error:', response.statusText);
+        console.log({ response });
       }
     } catch (error: any) {
       console.error('Error:', error.message);
+      console.log({ error });
     }
   }, [username, fullName, interests, router]);
 

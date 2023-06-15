@@ -10,12 +10,15 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import Calender from '../ui/calender';
+import { GroupStar } from '../ui/icons';
 import GroupAvatar from './GroupAvatar';
 
 const AllGroups = ({
   groups,
   boardCode,
+  username,
 }: {
+  username: string;
   groups: GroupInterface[];
   boardCode: string;
 }) => {
@@ -35,7 +38,7 @@ const AllGroups = ({
                 <Card
                   backgroundImage="/images/Youth_Mentor_Big.png"
                   backgroundSize="cover"
-                  width={{ base: '90vw', md: '30vw' }}
+                  width={{ base: '90vw', md: '25vw' }}
                   height="60vh"
                   mt={5}
                   display="grid"
@@ -44,9 +47,16 @@ const AllGroups = ({
                     router.push(`/board/${boardCode}/group/${group.id}`)
                   }
                 >
-                  <CardBody mt={{ base: '40vh', md: '35vh' }}>
+                  <CardBody>
                     <Grid>
+                      {group.members.filter(
+                        (member) => member.username === username
+                      ).length === 1 ? (
+                        // Star to signify current user is already a group member
+                        <GroupStar boxSize={8} />
+                      ) : null}
                       <Text
+                        mt={{ base: '40vh', md: '25vh' }}
                         color="white"
                         fontSize={{ base: '30px', md: '26px' }}
                         pb={{ base: 3, md: 1 }}
@@ -60,9 +70,9 @@ const AllGroups = ({
                 </Card>
                 <Flex gap="1rem" py={7}>
                   <Box
-                    bg="blackAlpha.500"
+                    bg="grey.event"
                     borderRadius="10px"
-                    width={{ base: '90vw', md: '30vw' }}
+                    width={{ base: '90vw', md: '25vw' }}
                   >
                     {group.events.length === 0 ? (
                       <Grid
@@ -84,7 +94,7 @@ const AllGroups = ({
                             lineHeight="1.1"
                             fontSize="2xl"
                           >
-                            {group.events[group.events.length - 1].title}
+                            {group.events[0].title}
                           </Text>
                           <Text
                             pt={1}
@@ -93,7 +103,7 @@ const AllGroups = ({
                             color="#3D3E3E"
                             lineHeight="1.2"
                           >
-                            {group.events[group.events.length - 1].description}{' '}
+                            {group.events[0].description}{' '}
                           </Text>
                           <Flex
                             pt={1}
@@ -102,10 +112,7 @@ const AllGroups = ({
                             gap={1}
                           >
                             <Text fontWeight="bold" color="red.3">
-                              {
-                                group.events[group.events.length - 1].organiser
-                                  .name
-                              }
+                              {group.events[0].organiser.name}
                             </Text>
                             <Box
                               width={1}
@@ -118,17 +125,14 @@ const AllGroups = ({
                               fontSize="lg"
                               color="red.3"
                             >
-                              {group.events[group.events.length - 1].startTime
-                                ? group.events[group.events.length - 1]
-                                    .startTime
+                              {group.events[0].startTime
+                                ? group.events[0].startTime
                                 : null}
                             </Text>
                           </Flex>
                         </Box>
                         <Spacer />
-                        <Calender
-                          date={group.events[group.events.length - 1].date}
-                        />
+                        <Calender date={group.events[0].date} />
                       </Flex>
                     )}
                   </Box>

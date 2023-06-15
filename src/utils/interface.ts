@@ -26,3 +26,18 @@ export interface Event {
   };
   createdAt?: Date;
 }
+
+export interface User {
+  username: string;
+  groups: any[];
+  allPosts: any[];
+  createdAt: string;
+  boards: {
+    id: string;
+    name: string;
+  };
+  interests: string[];
+  userId: string;
+  fullName: string;
+  role: string;
+}
