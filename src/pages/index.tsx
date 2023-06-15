@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -14,8 +14,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex align="center" justify="center" my="30" direction="column" gap={10}>
-        <Image src="/images/logo.png" width={50} height={50} alt="logo" />
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        my="30"
+        direction="column"
+        gap={10}
+        w={'100vw'}
+        h="100vh"
+      >
+        <Image src="/images/logo.png" width={150} height={170} alt="logo" />
+        <Text textAlign={'center'} color="#3D3D3E" fontSize={'medium'}>
+          Make friends <br /> in your neighbourhood
+        </Text>
       </Flex>
     </>
   );

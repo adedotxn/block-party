@@ -4,6 +4,7 @@ import GroupAvatar from '@/components/group/GroupAvatar';
 import JoinBtn from '@/components/group/JoinBtn';
 import Events from '@/components/group/events';
 import MessageBar from '@/components/group/messagebar';
+import ChatBar from '@/components/ui/chatbar';
 import Loader from '@/components/ui/loader';
 import { GroupInterface } from '@/utils/interface';
 import { ChevronLeftIcon, CloseIcon } from '@chakra-ui/icons';
@@ -199,6 +200,7 @@ const Group = () => {
                 ))}
               </Grid>
               {joined ? <MessageBar /> : null}
+              <ChatBar apiEndpoint="asdasd" />
             </TabPanel>
           </TabPanels>
         </Tabs>

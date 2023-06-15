@@ -1,10 +1,10 @@
-import { Avatar, Box, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
+import { Avatar, Flex, Text } from '@chakra-ui/react';
 
 const defaultText =
   ' Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.';
 const DiscussionCards = ({
   name,
-  username,
+  time,
   text = defaultText,
 }: {
   name: string;
@@ -12,31 +12,43 @@ const DiscussionCards = ({
   text?: string;
 }) => {
   return (
-    <Flex fontFamily="productSans">
-      <Avatar name={name} border="2px" size="md" />
-      <Spacer />
-      <Box
-        bg="blackAlpha.300"
-        px="4"
-        pt="2"
-        pb="4"
-        borderRadius="6px"
-        width={{ base: '70vw', md: '30vw' }}
-      >
-        <Flex color="blue.1" alignItems="center" gap=".5rem" pt="1">
-          <Heading fontSize=".95rem">{username}</Heading>
-          {/* <Text width="1" height="1" bg="blue.1" borderRadius="full" /> */}
-          {/* <Text fontSize=".8rem">3 weeks ago</Text> */}
-        </Flex>
-        <Text lineHeight="1.2" mt={3} fontSize=".95rem">
-          {text}
+    <Flex fontFamily="productSans" position="relative" p={5} bg="#F4F4F4">
+      <Avatar
+        name={name}
+        size="md"
+        position="absolute"
+        top={-5}
+        border="4px solid #EBEBEB"
+        filter="drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25))"
+        borderRadius="23.5px"
+      />
+      <Flex width="100%" flexDirection="column">
+        <Text
+          marginLeft="70px"
+          fontFamily="Samsung Sharp Sans"
+          fontWeight={700}
+          fontSize={'14px'}
+          color="#CC2900"
+        >
+          {name} .{' '}
+          <span
+            style={{
+              fontSize: '9px',
+            }}
+          >
+            {time}
+          </span>
         </Text>
-        {/* <Flex mt={3}>
-          <Text fontWeight="medium">Reply</Text>
-          <Spacer />
-          <StarIcon color="red.1" />
-        </Flex> */}
-      </Box>
+        <Text
+          fontFamily="productSans"
+          fontWeight={500}
+          fontSize="13px"
+          color="#000000"
+        >
+          {' '}
+          {text}{' '}
+        </Text>
+      </Flex>
     </Flex>
   );
 };

@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 interface User {
   fullName: string;
   username: string;
+  bio: string;
   interests: string[];
   // Add other properties if available
 }
@@ -44,6 +45,7 @@ const UserPage: React.FC = () => {
             justify="center"
             my="4"
             gap={2}
+            fontFamily="productSans"
           >
             <Avatar
               name={user.fullName}
@@ -68,8 +70,20 @@ const UserPage: React.FC = () => {
               lineHeight="30px"
               color="#CC2900"
               textTransform="capitalize"
+              fontFamily="productSans"
             >
               {user.fullName}
+            </Text>
+            <Text
+              textAlign="center"
+              fontWeight="700"
+              fontSize="27px"
+              lineHeight="30px"
+              color="#CC2900"
+              textTransform="capitalize"
+              fontFamily="productSans"
+            >
+              {user.bio}
             </Text>
 
             <Divider my={1} />
@@ -86,6 +100,7 @@ const UserPage: React.FC = () => {
                 color="#FF0000"
                 letterSpacing="-0.5px"
                 mb={1}
+                fontFamily="productSans"
               >
                 Interests
               </Text>
@@ -94,6 +109,7 @@ const UserPage: React.FC = () => {
                 fontWeight="400"
                 fontSize="10px"
                 color="#626262"
+                fontFamily="productSans"
                 onClick={() => {
                   router.push('/edit_interests');
                 }}
@@ -113,6 +129,7 @@ const UserPage: React.FC = () => {
                     background="#CC2900"
                     textAlign="center"
                     padding="5px"
+                    fontFamily="productSans"
                     fontSize={{ base: '9px', md: '11px' }}
                     lineHeight={{ base: '9px', md: '11px' }}
                     fontWeight={700}
@@ -132,7 +149,9 @@ const UserPage: React.FC = () => {
           </Flex>
         </Box>
       ) : (
-        <Text fontSize="xl">Loading...</Text>
+        <Text fontFamily="productSans" fontSize="xl">
+          Loading...
+        </Text>
       )}
     </Flex>
   );
