@@ -4,11 +4,11 @@ function UserInfo({ avatarUrl, username, occupation }) {
   return (
     <Box textAlign="center">
       <Avatar
-        size="xl"
+        size="md"
         src={avatarUrl}
         alt="User Avatar"
-        width={50}
-        height={50}
+        width={45}
+        height={45}
       />
       <Text
         fontSize="10px"
