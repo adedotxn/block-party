@@ -25,10 +25,10 @@ const UserPage: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('loggedinuser');
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedinuser'));
 
     if (loggedInUser) {
-      fetch(`/api/user/${loggedInUser}`)
+      fetch(`/api/user/${loggedInUser.username}`)
         .then((response) => response.json())
         .then((predata) => predata.data)
         .then((data: User) => setUser(data));

@@ -11,10 +11,17 @@ import React, { useEffect, useRef, useState } from 'react';
 
 type ChatBarProps = {
   boardCode: string;
+  username: string;
+  userId: string;
   groupId: string;
 };
 
-const ChatBar: React.FC<ChatBarProps> = ({ boardCode, groupId }) => {
+const ChatBar: React.FC<ChatBarProps> = ({
+  boardCode,
+  groupId,
+  userId,
+  username,
+}) => {
   const [message, setMessage] = useState('');
   const chatBarRef = useRef<HTMLDivElement>(null);
 
@@ -33,7 +40,7 @@ const ChatBar: React.FC<ChatBarProps> = ({ boardCode, groupId }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ message }),
+          body: JSON.stringify({ text: message, userId, username }),
         }
       );
 
