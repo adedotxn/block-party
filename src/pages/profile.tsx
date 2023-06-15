@@ -29,6 +29,7 @@ const UserPage: React.FC = () => {
     if (loggedInUser) {
       fetch(`/api/user/${loggedInUser}`)
         .then((response) => response.json())
+        .then((predata) => predata.data)
         .then((data: User) => setUser(data));
     }
   }, []);
@@ -45,7 +46,7 @@ const UserPage: React.FC = () => {
             gap={2}
           >
             <Avatar
-              name={user.data.fullName}
+              name={user.fullName}
               src=""
               bg="#d3b0b0"
               color="#CC2900"
@@ -68,7 +69,7 @@ const UserPage: React.FC = () => {
               color="#CC2900"
               textTransform="capitalize"
             >
-              {user.data.fullName}
+              {user.fullName}
             </Text>
 
             <Divider my={1} />
@@ -105,7 +106,7 @@ const UserPage: React.FC = () => {
               gap={4}
               alignItems="center"
             >
-              {user.data.interests.map((item, index) => (
+              {user.interests.map((item, index) => (
                 <GridItem key={index}>
                   <Text
                     borderRadius="33px"
