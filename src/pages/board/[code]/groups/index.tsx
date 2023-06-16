@@ -14,20 +14,12 @@ const Groups = () => {
 
   const loggedInUserRef = useRef<any>(null);
 
-  /*   useEffect(() => {
-    const username = localStorage.getItem('loggedinuser');
-    console.log('user:', localStorage.getItem('loggedinuser'));
-    if (username === null) {
-      router.push(`/invite/1`);
-    }
-  }, []);
- */
+  const loggedInUserStr = localStorage.getItem('bpuser');
+
+  loggedInUserRef.current =
+    loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
+
   useEffect(() => {
-    const loggedInUserStr = localStorage.getItem('bpuser');
-
-    loggedInUserRef.current =
-      loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
-
     const username = loggedInUserRef.current?.username;
 
     if (username === null) {

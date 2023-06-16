@@ -34,14 +34,13 @@ const Group = () => {
   const groupId = router.query.id;
 
   const loggedInUserRef = useRef<any>(null);
+  const loggedInUserStr = localStorage.getItem('bpuser');
+
+  loggedInUserRef.current =
+    loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
 
   //redirect to invite page if not already invited
   useEffect(() => {
-    const loggedInUserStr = localStorage.getItem('bpuser');
-
-    loggedInUserRef.current =
-      loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
-
     const username = loggedInUserRef.current?.username;
 
     if (username === null) {
