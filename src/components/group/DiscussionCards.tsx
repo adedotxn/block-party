@@ -27,23 +27,25 @@ const DiscussionCards = ({
         size="md"
         position="absolute"
         top={-5}
-        border="4px solid #EBEBEB"
+        border="4px solid #ffff"
         filter="drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25))"
         borderRadius="23.5px"
       />
       <Flex width="100%" flexDirection="column">
         <Text
+          pt={1}
+          fontWeight="semibold"
+          lineHeight="1.1"
+          fontSize="xl"
           marginLeft="70px"
           fontFamily="productSans"
-          fontWeight={700}
-          fontSize={'14px'}
           color="#CC2900"
           textTransform={'capitalize'}
         >
           {name} .{' '}
           <span
             style={{
-              fontSize: '9px',
+              fontSize: '11px',
             }}
           >
             {time}
@@ -51,9 +53,10 @@ const DiscussionCards = ({
         </Text>
         <Text
           fontFamily="productSans"
-          fontWeight={500}
-          fontSize="13px"
           color="#000000"
+          pt={1}
+          fontWeight="semibold"
+          fontSize="lg"
         >
           {' '}
           {text}{' '}
