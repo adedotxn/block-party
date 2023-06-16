@@ -25,7 +25,7 @@ const Calender = ({ date }: { date: string }) => {
         align="center"
         fontSize="5xl"
         fontWeight="extrabold"
-        bg="gray.200"
+        bg="grey.calender"
         height="61px"
         borderBottomRadius="10px"
         textAlign="center"

@@ -12,7 +12,7 @@ const Events = (props: { event: Event }) => {
       mt="1rem"
       px={6}
       py={3}
-      bg="blackAlpha.400"
+      bg="grey.event"
     >
       <Box width="20ch" fontFamily="productSans">
         <Text fontWeight="bold" lineHeight="1.1" fontSize="2xl">
@@ -27,9 +27,16 @@ const Events = (props: { event: Event }) => {
         >
           {event.description}{' '}
         </Text>
-        <Text pt={1} fontWeight="semibold" color="red.3" fontSize="lg">
-          {event.startTime ? event.startTime : null}
-        </Text>
+
+        <Flex pt={1} alignItems="center" fontSize="lg" gap={1}>
+          <Text fontWeight="bold" color="red.3">
+            {event.organiser.name}
+          </Text>
+          <Box width={1} height={1} rounded="full" bg="red.3" />
+          <Text fontWeight="light" fontSize="lg" color="red.3">
+            {event.startTime ? event.startTime : null}
+          </Text>
+        </Flex>
       </Box>
       <Spacer />
       <Calender date={event.date} />

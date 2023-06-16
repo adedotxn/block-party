@@ -6,7 +6,7 @@ import MessageBar from '@/components/group/messagebar';
 import Chats from '@/components/ui/chat';
 import ChatBar from '@/components/ui/chatbar';
 import Loader from '@/components/ui/loader';
-import { GroupInterface } from '@/utils/interface';
+import { GroupInterface, User } from '@/utils/interface';
 import { ChevronLeftIcon, CloseIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -35,13 +35,46 @@ const Group = () => {
 
   const loggedInUserRef = useRef<any>(null);
 
+  //redirect to invite page if not already invited
   useEffect(() => {
     const loggedInUserStr = localStorage.getItem('bpuser');
 
     loggedInUserRef.current =
       loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
-  }, []);
 
+    const username = loggedInUserRef.current?.username;
+
+    if (username === null) {
+      router.push(`/invite/1`);
+    }
+  }, [router]);
+
+  // get user data with username
+  const {
+    isLoading: loadingUser,
+    isError: isUserError,
+    data: userData,
+    error: userError,
+  } = useQuery({
+    queryKey: ['userdata'],
+    queryFn: async () => {
+      try {
+        const username = localStorage.getItem('loggedinuser');
+        if (username !== null) {
+          const response = await fetch(`/api/user/${username}`);
+          if (!response.ok) {
+            throw new Error('Request failed');
+          }
+          const data = await response.json();
+          return data;
+        }
+      } catch (error) {
+        throw new Error('Error fetching data');
+      }
+    },
+  });
+
+  // get inidividual group data with it's id
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['group'],
     queryFn: async () => {
@@ -71,11 +104,15 @@ const Group = () => {
     console.log('Group Data: ', data);
   }
 
+  if (!loadingUser && !isUserError) {
+    console.log('userdata ->>', userData);
+  }
+
   if (isError) {
     console.log('error,', error);
   }
 
-  if (isLoading) {
+  if (isLoading || loadingUser) {
     return (
       <Grid placeItems="center" height="100vh">
         <Loader />
@@ -84,6 +121,7 @@ const Group = () => {
   }
 
   const groupDetails: GroupInterface = data.data;
+  const userDetails: User = userData.data;
 
   return (
     <Box display="grid" placeItems="center">
@@ -129,7 +167,14 @@ const Group = () => {
           <Flex alignItems="center" my={4}>
             <GroupAvatar />
             <Spacer />
-            <JoinBtn joined={joined} />
+            <JoinBtn
+              boardCode={boardCode}
+              groupId={groupDetails.id}
+              groupName={groupDetails.name}
+              userId={userDetails.userId}
+              username={userDetails.username}
+              userGroups={userDetails.groups}
+            />
           </Flex>
         </Box>
         <Divider bg="blackAlpha.900" height={0.4} />
@@ -144,7 +189,7 @@ const Group = () => {
           variant="unstyled"
           mt={8}
         >
-          <TabList bg="#D9D9D9" borderRadius="41px" fontSize="18px">
+          <TabList bg="grey.tab" borderRadius="41px" fontSize="18px">
             <Tab
               px={16}
               py={2}
@@ -182,15 +227,26 @@ const Group = () => {
                     There are no events yet
                   </Text>
                 ) : (
+                  // all events cards
                   groupDetails.events
                     .sort((a: any, b: any) => b - a)
                     .map((event, index) => <Events key={index} event={event} />)
                 )
               ) : null}
 
-              <Grid placeItems="center" mt={6}>
-                <CreateEvent boardCode={boardCode} groupId={groupDetails.id} />
-              </Grid>
+              {/** button for creating events */}
+              {groupDetails.members.filter(
+                (member) => member.username === userDetails.username
+              ).length === 1 ? (
+                <Grid placeItems="center" mt={6}>
+                  <CreateEvent
+                    boardCode={boardCode}
+                    groupId={groupDetails.id}
+                    organiserId={userDetails.userId}
+                    organiserName={userDetails.username}
+                  />
+                </Grid>
+              ) : null}
             </TabPanel>
 
             {/** Discussions Panel */}
