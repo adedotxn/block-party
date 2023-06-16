@@ -10,9 +10,18 @@ const DiscussionCards = ({
   name: string;
   username: string;
   text?: string;
+  time: string;
 }) => {
   return (
-    <Flex fontFamily="productSans" position="relative" p={5} bg="#F4F4F4">
+    <Flex
+      fontFamily="productSans"
+      position="relative"
+      px={5}
+      py={2}
+      bg="#F4F4F4"
+      minH={'70px'}
+      borderRadius={'10px'}
+    >
       <Avatar
         name={name}
         size="md"
@@ -25,10 +34,11 @@ const DiscussionCards = ({
       <Flex width="100%" flexDirection="column">
         <Text
           marginLeft="70px"
-          fontFamily="Samsung Sharp Sans"
+          fontFamily="productSans"
           fontWeight={700}
           fontSize={'14px'}
           color="#CC2900"
+          textTransform={'capitalize'}
         >
           {name} .{' '}
           <span

@@ -25,7 +25,9 @@ const UserPage: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedinuser'));
+    const loggedInUserStr = localStorage.getItem('bpuser');
+    const loggedInUser =
+      loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
 
     if (loggedInUser) {
       fetch(`/api/user/${loggedInUser.username}`)

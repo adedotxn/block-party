@@ -32,9 +32,11 @@ const ChatBar: React.FC<ChatBarProps> = ({
   }, [message]);
 
   const handleSendMessage = async () => {
+    console.log({ boardCode, groupId, text: message, userId, username });
+
     try {
       const response = await fetch(
-        `/board/${boardCode}/group/post/${groupId}`,
+        `http://localhost:3000/api/board/${boardCode}/group/post/${groupId}`,
         {
           method: 'POST',
           headers: {

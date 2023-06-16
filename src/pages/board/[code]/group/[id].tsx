@@ -1,9 +1,9 @@
 import CreateEvent from '@/components/group/CreateEvent';
-import DiscussionCards from '@/components/group/DiscussionCards';
 import GroupAvatar from '@/components/group/GroupAvatar';
 import JoinBtn from '@/components/group/JoinBtn';
 import Events from '@/components/group/events';
 import MessageBar from '@/components/group/messagebar';
+import Chats from '@/components/ui/chat';
 import ChatBar from '@/components/ui/chatbar';
 import Loader from '@/components/ui/loader';
 import { GroupInterface } from '@/utils/interface';
@@ -26,12 +26,21 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Group = () => {
   const router = useRouter();
   const boardCode = router.query.code as string;
   const groupId = router.query.id;
+
+  const loggedInUserRef = useRef<any>(null);
+
+  useEffect(() => {
+    const loggedInUserStr = localStorage.getItem('bpuser');
+
+    loggedInUserRef.current =
+      loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
+  }, []);
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['group'],
@@ -186,21 +195,15 @@ const Group = () => {
 
             {/** Discussions Panel */}
             <TabPanel>
-              <Grid mt={12} gap="2rem" pb={20}>
-                {[
-                  { name: 'Philip Adewole', username: 'Philip The Great' },
-                  { name: 'Sarah Wong', username: 'Sarah The Magneficent' },
-                  { name: 'Assad', username: 'nottherealalanturing' },
-                ].map((post, index) => (
-                  <DiscussionCards
-                    key={index}
-                    name={post.name}
-                    username={post.username}
-                  />
-                ))}
-              </Grid>
+              <Chats boardCode={boardCode} groupId={groupDetails.id} />
               {joined ? <MessageBar /> : null}
-              <ChatBar boardCode={boardCode} groupId={groupDetails.id} />
+
+              <ChatBar
+                boardCode={boardCode}
+                groupId={groupDetails.id}
+                username={loggedInUserRef.current?.username}
+                userId={loggedInUserRef.current?.userID}
+              />
             </TabPanel>
           </TabPanels>
         </Tabs>
