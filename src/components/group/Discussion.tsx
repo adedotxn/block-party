@@ -22,6 +22,8 @@ const Discussion = () => {
             key={index}
             name={post.name}
             username={post.username}
+            time="placeholder"
+            text="placeholder"
           />
         ))}
       </Grid>
