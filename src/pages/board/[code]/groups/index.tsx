@@ -6,19 +6,34 @@ import { Container, Flex, Grid, Heading, Link, Spacer } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const Groups = () => {
   const router = useRouter();
   const boardCode = router.query.code as string;
 
-  useEffect(() => {
+  const loggedInUserRef = useRef<any>(null);
+
+  /*   useEffect(() => {
     const username = localStorage.getItem('loggedinuser');
     console.log('user:', localStorage.getItem('loggedinuser'));
     if (username === null) {
       router.push(`/invite/1`);
     }
   }, []);
+ */
+  useEffect(() => {
+    const loggedInUserStr = localStorage.getItem('bpuser');
+
+    loggedInUserRef.current =
+      loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
+
+    const username = loggedInUserRef.current?.username;
+
+    if (username === null) {
+      router.push(`/invite/1`);
+    }
+  }, [router]);
 
   const {
     isLoading: loadingUser,
@@ -31,7 +46,9 @@ const Groups = () => {
       try {
         const username = localStorage.getItem('loggedinuser');
         if (username !== null) {
-          const response = await fetch(`/api/user/${username}`);
+          const response = await fetch(
+            `/api/user/${loggedInUserRef.current?.username}`
+          );
           if (!response.ok) {
             throw new Error('Request failed');
           }
