@@ -36,7 +36,7 @@ const Chats: React.FC<ChatProps> = ({ boardCode, groupId }) => {
     };
 
     fetchChats();
-  }, [boardCode, groupId]);
+  }, [boardCode, groupId, chats]);
 
   return (
     <Grid mt={12} gap="2rem" pb={20}>

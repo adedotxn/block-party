@@ -36,7 +36,7 @@ const ChatBar: React.FC<ChatBarProps> = ({
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/board/${boardCode}/group/post/${groupId}`,
+        `/api/board/${boardCode}/group/post/${groupId}`,
         {
           method: 'POST',
           headers: {

@@ -40,7 +40,7 @@ const Group = () => {
     if (username === null) {
       router.push(`/invite/1`);
     }
-  }, []);
+  }, [router]);
 
   // get user data with username
   const {
