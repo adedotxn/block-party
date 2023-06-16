@@ -60,22 +60,15 @@ function InterestsCheckboxGroup({
   const selectedImageOpacity = useColorModeValue(1, 0.5);
 
   return (
-    <Flex
-      flexDirection="column"
-      justifyContent={'center'}
-      alignItems={'center'}
-      padding={10}
-      gap={4}
-    >
+    <Flex direction="column" p={10} gap={4}>
       <Text
-        fontWeight="700"
-        fontSize="25px"
+        fontWeight="500"
+        fontSize="20px"
         lineHeight="25px"
-        color="#CC2900"
+        color="#003566"
         textAlign="center"
-        fontFamily="productSans"
       >
-        Edit Interest
+        Hi, {user}! <br /> u are you interested in?
       </Text>
       <FormControl textAlign="center">
         <CheckboxGroup
@@ -83,11 +76,7 @@ function InterestsCheckboxGroup({
           onChange={handleInterestsChange}
           value={value}
         >
-          <Grid
-            templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }}
-            gap={4}
-            alignItems="center"
-          >
+          <Grid templateColumns="repeat(auto-fit, minmax(100px, 1fr))" gap={4}>
             {interestsOptions.map((interest) => (
               <GridItem key={interest.title}>
                 <Checkbox
@@ -146,7 +135,7 @@ function InterestsCheckboxGroup({
           mt={4}
           onClick={() => {}}
         >
-          Update Interest
+          Update
         </Button>
       </FormControl>
     </Flex>

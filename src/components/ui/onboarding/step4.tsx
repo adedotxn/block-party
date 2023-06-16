@@ -17,6 +17,7 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
       fullName,
       interests,
     };
+    //const userString = JSON.stringify(user);
 
     try {
       const response = await fetch('/api/board/join/P15Ry1', {
@@ -28,11 +29,8 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
       });
 
       if (response.ok) {
-        const res = await response.json();
-        localStorage.setItem(
-          'bpuser',
-          JSON.stringify({ ...user, userID: res.userId })
-        );
+        await response.json();
+        localStorage.setItem('loggedinuser', user.username);
         router.push('/board/P15Ry1/groups');
       } else {
         console.error('Error:', response.statusText);
