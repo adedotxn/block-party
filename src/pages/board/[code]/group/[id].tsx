@@ -26,21 +26,28 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Group = () => {
   const router = useRouter();
   const boardCode = router.query.code as string;
   const groupId = router.query.id;
 
+  const loggedInUserRef = useRef<any>(null);
+
   //redirect to invite page if not already invited
   useEffect(() => {
-    const username = localStorage.getItem('loggedinuser');
-    console.log('user:', localStorage.getItem('loggedinuser'));
+    const loggedInUserStr = localStorage.getItem('bpuser');
+
+    loggedInUserRef.current =
+      loggedInUserStr !== null ? JSON.parse(loggedInUserStr) : null;
+
+    const username = loggedInUserRef.current?.username;
+
     if (username === null) {
       router.push(`/invite/1`);
     }
-  }, []);
+  }, [router]);
 
   // get user data with username
   const {
@@ -54,7 +61,9 @@ const Group = () => {
       try {
         const username = localStorage.getItem('loggedinuser');
         if (username !== null) {
-          const response = await fetch(`/api/user/${username}`);
+          const response = await fetch(
+            `/api/user/${loggedInUserRef.current?.username}`
+          );
           if (!response.ok) {
             throw new Error('Request failed');
           }
@@ -254,6 +263,13 @@ const Group = () => {
                 />
               </Grid>
               {joined ? <MessageBar /> : null}
+
+              <ChatBar
+                boardCode={boardCode}
+                groupId={groupDetails.id}
+                username={loggedInUserRef.current?.username}
+                userId={loggedInUserRef.current?.userID}
+              />
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -14,9 +14,17 @@ const Discussion = () => {
 
       <Grid mt={12} gap="2rem" pb={20}>
         {[
-          { name: 'Philip Adewole', username: 'Philip The Great' },
-          { name: 'Sarah Wong', username: 'Sarah The Magneficent' },
-          { name: 'Assad', username: 'nottherealalanturing' },
+          {
+            name: 'Philip Adewole',
+            username: 'Philip The Great',
+            time: '2023',
+          },
+          {
+            name: 'Sarah Wong',
+            username: 'Sarah The Magneficent',
+            time: '2023',
+          },
+          { name: 'Assad', username: 'nottherealalanturing', time: '2023' },
         ].map((post, index) => (
           <DiscussionCards
             key={index}
