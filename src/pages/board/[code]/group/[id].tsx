@@ -61,7 +61,9 @@ const Group = () => {
       try {
         const username = localStorage.getItem('loggedinuser');
         if (username !== null) {
-          const response = await fetch(`/api/user/${username}`);
+          const response = await fetch(
+            `/api/user/${loggedInUserRef.current?.username}`
+          );
           if (!response.ok) {
             throw new Error('Request failed');
           }
