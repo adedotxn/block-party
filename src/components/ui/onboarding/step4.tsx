@@ -80,7 +80,7 @@ const Step4: React.FC<Step4Props> = ({ username, fullName, interests }) => {
         color="#3D3D3E"
         textAlign="center"
       >
-        Your personalised group recommendations are on the way!
+        Discovering your local <br /> groups...
       </Text>
     </Flex>
   );

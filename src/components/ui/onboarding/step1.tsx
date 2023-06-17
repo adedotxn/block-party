@@ -75,14 +75,16 @@ const Step1: React.FC<Step1Props> = ({ handler }) => {
 
           <Text
             color={'#003566'}
+            fontFamily="productSans"
             fontWeight={700}
-            fontSize="16px"
+            fontSize="lg"
             lineHeight="15px"
             letterSpacing="-0.03em"
             textAlign="center"
           >
-            Making an impact. <br />
-            Building Connections.
+            Make friends in
+            <br />
+            your neigbourhood.
           </Text>
         </Flex>
       </Box>

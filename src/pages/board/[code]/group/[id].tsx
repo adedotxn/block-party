@@ -2,7 +2,6 @@ import CreateEvent from '@/components/group/CreateEvent';
 import GroupAvatar from '@/components/group/GroupAvatar';
 import JoinBtn from '@/components/group/JoinBtn';
 import Events from '@/components/group/events';
-import MessageBar from '@/components/group/messagebar';
 import Chats from '@/components/ui/chat';
 import ChatBar from '@/components/ui/chatbar';
 import Loader from '@/components/ui/loader';
@@ -246,21 +245,20 @@ const Group = () => {
             <TabPanel>
               <Grid mt={12} gap="2rem" pb={20}>
                 <Chats boardCode={boardCode} groupId={groupDetails.id} />
-                <ChatBar
-                  boardCode={boardCode}
-                  groupId={groupDetails.id}
-                  username={userDetails.username}
-                  userId={userDetails.userId}
-                />
               </Grid>
-              {joined ? <MessageBar /> : null}
-
-              <ChatBar
-                boardCode={boardCode}
-                groupId={groupDetails.id}
-                username={userDetails.username}
-                userId={userDetails.userId}
-              />
+              {groupDetails.members.filter(
+                (member) => member.username === userDetails.username
+              ).length === 1 ? (
+                <Grid placeItems="center" mt={6}>
+                  <ChatBar
+                    boardCode={boardCode}
+                    groupId={groupDetails.id}
+                    fullName={userDetails.fullName}
+                    userId={userDetails.userId}
+                    username={userDetails.username}
+                  />
+                </Grid>
+              ) : null}
             </TabPanel>
           </TabPanels>
         </Tabs>

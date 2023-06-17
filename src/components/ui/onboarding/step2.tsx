@@ -74,11 +74,11 @@ const Step2: React.FC<Step3Props> = ({
         onChange={(e) => setUsername(e.target.value)}
         required
       />
-      {isInputEmpty && (
+      {/*  {isInputEmpty && (
         <Text color="red.500" mt={2} fontSize="14px" textAlign="center">
           Please enter your name and pick a username to proceed.
         </Text>
-      )}
+      )} */}
       <Button
         bg="#FF0000"
         color="#FFFFFF"
