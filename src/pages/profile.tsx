@@ -1,3 +1,4 @@
+import { CloseIcon } from '@chakra-ui/icons';
 import {
   Avatar,
   AvatarBadge,
@@ -23,6 +24,10 @@ const UserPage: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
+  const goBack = () => {
+    router.back();
+  };
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedinuser');
 
@@ -36,6 +41,16 @@ const UserPage: React.FC = () => {
 
   return (
     <Flex direction="column" align="center" justify="center" h="100vh" p={4}>
+      <Button
+        position="fixed"
+        top={10}
+        right={4}
+        onClick={goBack}
+        variant="ghost"
+        colorScheme="gray"
+      >
+        <CloseIcon color="black" />
+      </Button>
       {user ? (
         <Box width="100%" maxWidth={{ base: '280px', md: '600px' }}>
           <Flex
