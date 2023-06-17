@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 type ChatBarProps = {
   boardCode: string;
+  fullName: string;
   username: string;
   userId: string;
   groupId: string;
@@ -20,6 +21,7 @@ const ChatBar: React.FC<ChatBarProps> = ({
   boardCode,
   groupId,
   userId,
+  fullName,
   username,
 }) => {
   const [message, setMessage] = useState('');
@@ -32,7 +34,7 @@ const ChatBar: React.FC<ChatBarProps> = ({
   }, [message]);
 
   const handleSendMessage = async () => {
-    console.log({ boardCode, groupId, text: message, userId, username });
+    console.log({ boardCode, groupId, text: message, userId, fullName });
 
     try {
       const response = await fetch(
@@ -79,7 +81,7 @@ const ChatBar: React.FC<ChatBarProps> = ({
       <Flex align="center" width="100%" maxWidth="600px" gap={4}>
         <Avatar
           size="sm"
-          name={username}
+          name={fullName}
           src="/avatar.png"
           border="1px solid #ffff"
         />
