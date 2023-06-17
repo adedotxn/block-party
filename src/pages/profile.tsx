@@ -8,8 +8,10 @@ import {
   Flex,
   Grid,
   GridItem,
+  Link,
   Text,
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -24,10 +26,6 @@ const UserPage: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
-  const goBack = () => {
-    router.back();
-  };
-
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedinuser');
 
@@ -41,16 +39,16 @@ const UserPage: React.FC = () => {
 
   return (
     <Flex direction="column" align="center" justify="center" h="100vh" p={4}>
-      <Button
+      <Link
+        as={NextLink}
+        href={`/board/P15Ry1/groups`}
         position="fixed"
-        top={10}
-        right={4}
-        onClick={goBack}
-        variant="ghost"
-        colorScheme="gray"
+        top={20}
+        right={10}
       >
         <CloseIcon color="black" />
-      </Button>
+      </Link>
+
       {user ? (
         <Box width="100%" maxWidth={{ base: '280px', md: '600px' }}>
           <Flex
