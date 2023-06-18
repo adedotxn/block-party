@@ -11,11 +11,10 @@ import {
   where,
 } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
-import { currentDate } from '../constants';
 
 export const createPost = async (
   post: { text: string },
-  user: { id: string; username: string },
+  user: { id: string; username: string; fullName: string },
   boardCode: string,
   groupId: string
 ) => {
@@ -32,11 +31,12 @@ export const createPost = async (
         user: {
           id: user.id,
           username: user.username,
+          fullName: user.fullName,
         },
         likes: 0,
         likedBy: [],
         dislikes: 0,
-        createdAt: currentDate,
+        createdAt: new Date(),
         comments: [],
       };
 

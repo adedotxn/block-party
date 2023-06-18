@@ -14,6 +14,7 @@ const Groups = () => {
 
   useEffect(() => {
     const username = localStorage.getItem('loggedinuser');
+    console.log('username', username);
     console.log('user:', localStorage.getItem('loggedinuser'));
     if (username === null) {
       router.push(`/invite/1`);
@@ -39,6 +40,7 @@ const Groups = () => {
           return data;
         }
       } catch (error) {
+        router.push(`/invite/1`);
         throw new Error('Error fetching data');
       }
     },
@@ -61,16 +63,17 @@ const Groups = () => {
     enabled: boardCode !== undefined,
   });
 
+  /*
   if (!isLoading && !isError) {
-    console.log('Data: ', data);
+    // console.log('Data: ', data);
   }
 
   if (!loadingUser && !isUserError) {
-    console.log('userdata ->', userData);
-  }
+    // console.log('userdata ->', userData);
+  }*/
 
   if (isError) {
-    console.log('error,', error);
+    console.error(error);
   }
 
   if (isLoading || loadingUser) {

@@ -13,6 +13,19 @@ import Calender from '../ui/calender';
 import { GroupStar } from '../ui/icons';
 import GroupAvatar from './GroupAvatar';
 
+const imagePaths: { [key: string]: string } = {
+  'Popcorn Munchers': '/images/Popcorn_Munchers.jpg',
+  'Game Warriors': '/images/Game_Warriors.jpg',
+  'Boardgame Guild': '/images/Boardgame_Guild.jpg',
+  Footballers: '/images/Footballers.jpg',
+  // 'Outdoor Explorers': '/images/Outdoor_Explorers.jpg',
+  'Book Worms': '/images/Book_Worms.jpg',
+  'Green Thumbs': '/images/Green_Thumbs.jpg',
+  'Fitness Warriors': '/images/Fitness_Warriors.jpg',
+  Crafters: '/images/Crafters.jpg',
+  'Cats Lovers': '/images/Cats_Lovers.jpg',
+};
+
 const AllGroups = ({
   groups,
   boardCode,
@@ -29,6 +42,14 @@ const AllGroups = ({
   };
   const router = useRouter();
 
+  const upcomingEvent = groups.map((group) => {
+    const sortedEvents = group.events.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+
+    return sortedEvents[0];
+  });
+
   return (
     <section style={{ ...sliderStyle }}>
       <div style={{ display: 'flex', gap: '1rem' }}>
@@ -36,7 +57,9 @@ const AllGroups = ({
           ? groups.map((group) => (
               <div key={group.id} style={{ paddingBottom: '3rem' }}>
                 <Card
-                  backgroundImage="/images/Youth_Mentor_Big.png"
+                  backgroundImage={
+                    imagePaths[group.name] ?? '/images/Youth_Mentor_Big.png'
+                  }
                   backgroundSize="cover"
                   width={{ base: '90vw', md: '25vw' }}
                   height="60vh"
@@ -61,10 +84,11 @@ const AllGroups = ({
                         fontSize={{ base: '30px', md: '26px' }}
                         pb={{ base: 3, md: 1 }}
                         fontWeight="semibold"
+                        textShadow="2px 2px 5px black"
                       >
                         {group.name}
                       </Text>
-                      <GroupAvatar />
+                      <GroupAvatar members={group.members} />
                     </Grid>
                   </CardBody>
                 </Card>
@@ -94,16 +118,16 @@ const AllGroups = ({
                             lineHeight="1.1"
                             fontSize="2xl"
                           >
-                            {group.events[0].title}
+                            {upcomingEvent[0].title}
                           </Text>
                           <Text
                             pt={1}
                             fontWeight="semibold"
-                            fontSize="xl"
+                            fontSize="lg"
                             color="#3D3E3E"
                             lineHeight="1.2"
                           >
-                            {group.events[0].description}{' '}
+                            {upcomingEvent[0].description}{' '}
                           </Text>
                           <Flex
                             pt={1}
@@ -112,7 +136,7 @@ const AllGroups = ({
                             gap={1}
                           >
                             <Text fontWeight="bold" color="red.3">
-                              {group.events[0].organiser.name}
+                              {upcomingEvent[0].organiser.name}
                             </Text>
                             <Box
                               width={1}
@@ -125,14 +149,14 @@ const AllGroups = ({
                               fontSize="lg"
                               color="red.3"
                             >
-                              {group.events[0].startTime
-                                ? group.events[0].startTime
+                              {upcomingEvent[0].startTime
+                                ? upcomingEvent[0].startTime
                                 : null}
                             </Text>
                           </Flex>
                         </Box>
                         <Spacer />
-                        <Calender date={group.events[0].date} />
+                        <Calender date={upcomingEvent[0].date} />
                       </Flex>
                     )}
                   </Box>

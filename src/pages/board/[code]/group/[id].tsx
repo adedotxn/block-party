@@ -27,10 +27,33 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+type Chat = {
+  name: string;
+  username: string;
+  user: any;
+  text: string;
+  createdAt: string;
+};
+
+const imagePaths: { [key: string]: string } = {
+  'Popcorn Munchers': '/images/Popcorn_Munchers.jpg',
+  'Game Warriors': '/images/Game_Warriors.jpg',
+  'Boardgame Guild': '/images/Boardgame_Guild.jpg',
+  Footballers: '/images/Footballers.jpg',
+  // 'Outdoor Explorers': '/images/Outdoor_Explorers.jpg',
+  'Book Worms': '/images/Book_Worms.jpg',
+  'Green Thumbs': '/images/Green_Thumbs.jpg',
+  'Fitness Warriors': '/images/Fitness_Warriors.jpg',
+  Crafters: '/images/Crafters.jpg',
+  'Cats Lovers': '/images/Cats_Lovers.jpg',
+};
+
 const Group = () => {
   const router = useRouter();
   const boardCode = router.query.code as string;
   const groupId = router.query.id;
+
+  const [chats, setChats] = useState<Chat[]>([]);
 
   //redirect to invite page if not already invited
   useEffect(() => {
@@ -39,7 +62,7 @@ const Group = () => {
     if (username === null) {
       router.push(`/invite/1`);
     }
-  }, [router]);
+  }, []);
 
   // get user data with username
   const {
@@ -61,6 +84,7 @@ const Group = () => {
           return data;
         }
       } catch (error) {
+        router.push(`/invite/1`);
         throw new Error('Error fetching data');
       }
     },
@@ -92,6 +116,7 @@ const Group = () => {
     return joined ? setJoined(false) : setJoined(true);
   };
 
+  // /**
   if (!isLoading && !isError) {
     console.log('Group Data: ', data);
   }
@@ -99,9 +124,10 @@ const Group = () => {
   if (!loadingUser && !isUserError) {
     console.log('userdata ->>', userData);
   }
+  // */
 
   if (isError) {
-    console.log('error,', error);
+    console.error(error);
   }
 
   if (isLoading || loadingUser) {
@@ -119,7 +145,9 @@ const Group = () => {
     <Box display="grid" placeItems="center">
       <Box width={{ md: '40vw' }}>
         <Box
-          backgroundImage="/images/Youth_Mentor_2.png"
+          backgroundImage={
+            imagePaths[groupDetails.name] ?? '/images/Youth_Mentor_Big.png'
+          }
           backgroundSize="cover"
           height="45vh"
           borderBottomRadius="1.3rem"
@@ -150,21 +178,18 @@ const Group = () => {
           </Heading>
           {/* <Text>{groupDetails.description}</Text> */}
           <Text fontFamily="productSans" lineHeight={1} fontSize="md">
-            {' '}
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel
-            reiciendis sint, ipsum nobis accusantium eum accusamus iste
-            recusandae possimus expedita?{' '}
+            {groupDetails.description}
           </Text>
 
           <Flex alignItems="center" my={4}>
-            <GroupAvatar />
+            <GroupAvatar members={groupDetails.members} />
             <Spacer />
             <JoinBtn
               boardCode={boardCode}
               groupId={groupDetails.id}
               groupName={groupDetails.name}
               userId={userDetails.userId}
-              username={userDetails.username}
+              name={userDetails.fullName}
               userGroups={userDetails.groups}
             />
           </Flex>
@@ -221,21 +246,24 @@ const Group = () => {
                 ) : (
                   // all events cards
                   groupDetails.events
-                    .sort((a: any, b: any) => b - a)
+                    .sort(
+                      (a, b) =>
+                        new Date(a.date).getTime() - new Date(b.date).getTime()
+                    )
                     .map((event, index) => <Events key={index} event={event} />)
                 )
               ) : null}
 
               {/** button for creating events */}
               {groupDetails.members.filter(
-                (member) => member.username === userDetails.username
+                (member) => member.id === userDetails.userId
               ).length === 1 ? (
                 <Grid placeItems="center" mt={6}>
                   <CreateEvent
                     boardCode={boardCode}
                     groupId={groupDetails.id}
                     organiserId={userDetails.userId}
-                    organiserName={userDetails.username}
+                    organiserName={userDetails.fullName}
                   />
                 </Grid>
               ) : null}
@@ -244,10 +272,14 @@ const Group = () => {
             {/** Discussions Panel */}
             <TabPanel>
               <Grid mt={12} gap="2rem" pb={20}>
-                <Chats boardCode={boardCode} groupId={groupDetails.id} />
+                <Chats
+                  boardCode={boardCode}
+                  groupId={groupDetails.id}
+                  chatsdata={[chats, setChats]}
+                />
               </Grid>
               {groupDetails.members.filter(
-                (member) => member.username === userDetails.username
+                (member) => member.name === userDetails.fullName
               ).length === 1 ? (
                 <Grid placeItems="center" mt={6}>
                   <ChatBar
@@ -256,6 +288,7 @@ const Group = () => {
                     fullName={userDetails.fullName}
                     userId={userDetails.userId}
                     username={userDetails.username}
+                    chatsdata={[chats, setChats]}
                   />
                 </Grid>
               ) : null}

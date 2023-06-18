@@ -3,7 +3,7 @@ export interface ResponseInterface {
 }
 
 export interface GroupInterface {
-  allPosts: any[];
+  display: string;
   description: string;
   members: any[];
   events: Event[];
@@ -13,7 +13,7 @@ export interface GroupInterface {
 }
 
 export interface Event {
-  id: string;
+  id?: string;
   title: string;
   description?: string;
   date: string;

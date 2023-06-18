@@ -1,10 +1,11 @@
 import { Grid } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import DiscussionCards from '../group/DiscussionCards';
 
 type ChatProps = {
   boardCode: string;
   groupId: string;
+  chatsdata: any;
 };
 
 type Chat = {
@@ -15,9 +16,13 @@ type Chat = {
   createdAt: string;
 };
 
-const Chats: React.FC<ChatProps> = ({ boardCode, groupId }) => {
-  const [chats, setChats] = useState<Chat[]>([]);
+const formattedDate = (timestamp: any) => {
+  const date = new Date(timestamp.seconds * 1000);
+  return date.toISOString().slice(0, 19).replace('T', ' ');
+};
 
+const Chats: React.FC<ChatProps> = ({ boardCode, groupId, chatsdata }) => {
+  const [chats, setChats] = chatsdata;
   useEffect(() => {
     const fetchChats = async () => {
       try {
@@ -26,7 +31,13 @@ const Chats: React.FC<ChatProps> = ({ boardCode, groupId }) => {
         );
         if (response.ok) {
           const data = await response.json();
-          setChats(data.data);
+          const sortedChats = data.data.sort((a: any, b: any) => {
+            const dateA: any = new Date(a.createdAt.seconds);
+            const dateB: any = new Date(b.createdAt.seconds);
+            return dateA - dateB;
+          });
+          setChats(sortedChats);
+          console.log(chats);
         } else {
           console.error('Error fetching chats:', response.status);
         }
@@ -36,17 +47,18 @@ const Chats: React.FC<ChatProps> = ({ boardCode, groupId }) => {
     };
 
     fetchChats();
-  }, [boardCode, groupId, chats]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [boardCode, groupId, setChats]);
 
   return (
     <Grid mt={12} gap="2rem" pb={20}>
-      {chats.map((post, index) => (
+      {chats.map((post: Chat, index: number) => (
         <DiscussionCards
           key={index}
-          name={post.user.username}
+          name={post.user.fullName}
           username={post.user.username}
           text={post.text}
-          time={post.createdAt}
+          time={formattedDate(post.createdAt)}
         />
       ))}
     </Grid>

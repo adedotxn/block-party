@@ -22,7 +22,7 @@ const Events = (props: { event: Event }) => {
           pt={1}
           fontWeight="semibold"
           lineHeight="1.1"
-          fontSize="xl"
+          fontSize="lg"
           color="#3D3E3E"
         >
           {event.description}{' '}
