@@ -3,7 +3,7 @@ export interface ResponseInterface {
 }
 
 export interface GroupInterface {
-  allPosts: any[];
+  display: string;
   description: string;
   members: any[];
   events: Event[];

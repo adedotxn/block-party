@@ -37,6 +37,7 @@ const AllGroups = ({
               <div key={group.id} style={{ paddingBottom: '3rem' }}>
                 <Card
                   backgroundImage="/images/Youth_Mentor_Big.png"
+                  // backgroundImage={group.display}
                   backgroundSize="cover"
                   width={{ base: '90vw', md: '25vw' }}
                   height="60vh"
