@@ -8,7 +8,7 @@ interface JoinProps {
   userGroups: { name: string; id: string }[];
   groupName: string;
   groupId: string;
-  username: string;
+  name: string;
 }
 
 const JoinBtn = ({
@@ -17,7 +17,7 @@ const JoinBtn = ({
   groupName,
   userId,
   userGroups,
-  username,
+  name,
 }: JoinProps) => {
   const queryClient = useQueryClient();
 
@@ -80,7 +80,7 @@ const JoinBtn = ({
           fontSize="lg"
           colorScheme="yellow"
           onClick={() => {
-            mutation.mutate({ username, userId });
+            mutation.mutate({ name, userId });
           }}
         >
           Join

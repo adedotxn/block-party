@@ -30,12 +30,12 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { userId, username } = req.body;
+    const { userId, name } = req.body;
     const groupResp = await getSpecificGroupWithId(id, boardCode);
 
     if (groupResp?.status === 'success' && groupResp.data) {
       const groupRespData: any = groupResp.data;
-      const user: { id: string; username: string } = { id: userId, username };
+      const user: { id: string; name: string } = { id: userId, name };
       const group: { id: string; name: string } = {
         id: groupRespData.id,
         name: groupRespData.name,

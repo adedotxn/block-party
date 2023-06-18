@@ -1,3 +1,4 @@
+import { Event } from '@/utils/interface';
 import {
   Box,
   Button,
@@ -50,7 +51,7 @@ const CreateEvent = ({
   };
 
   const mutation = useMutation({
-    mutationFn: (event: any) => {
+    mutationFn: (event: Event) => {
       return fetch(`/api/board/${boardCode}/group/events/${groupId}`, {
         method: 'POST',
         credentials: 'include',
