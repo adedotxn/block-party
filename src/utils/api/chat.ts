@@ -11,7 +11,6 @@ import {
   where,
 } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
-import { currentDate } from '../constants';
 
 export const createPost = async (
   post: { text: string },
@@ -36,7 +35,7 @@ export const createPost = async (
         likes: 0,
         likedBy: [],
         dislikes: 0,
-        createdAt: currentDate,
+        createdAt: new Date(),
         comments: [],
       };
 

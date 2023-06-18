@@ -37,6 +37,7 @@ const AllGroups = ({
               <div key={group.id} style={{ paddingBottom: '3rem' }}>
                 <Card
                   backgroundImage="/images/Youth_Mentor_Big.png"
+                  // backgroundImage={group.display}
                   backgroundSize="cover"
                   width={{ base: '90vw', md: '25vw' }}
                   height="60vh"
@@ -99,7 +100,7 @@ const AllGroups = ({
                           <Text
                             pt={1}
                             fontWeight="semibold"
-                            fontSize="xl"
+                            fontSize="lg"
                             color="#3D3E3E"
                             lineHeight="1.2"
                           >
