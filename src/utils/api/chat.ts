@@ -14,7 +14,7 @@ import { nanoid } from 'nanoid';
 
 export const createPost = async (
   post: { text: string },
-  user: { id: string; username: string },
+  user: { id: string; username: string; fullName: string },
   boardCode: string,
   groupId: string
 ) => {
@@ -31,6 +31,7 @@ export const createPost = async (
         user: {
           id: user.id,
           username: user.username,
+          fullName: user.fullName,
         },
         likes: 0,
         likedBy: [],

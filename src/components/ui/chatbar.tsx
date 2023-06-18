@@ -15,6 +15,7 @@ type ChatBarProps = {
   username: string;
   userId: string;
   groupId: string;
+  chatsdata: any;
 };
 
 const ChatBar: React.FC<ChatBarProps> = ({
@@ -23,8 +24,11 @@ const ChatBar: React.FC<ChatBarProps> = ({
   userId,
   fullName,
   username,
+  chatsdata,
 }) => {
   const [message, setMessage] = useState('');
+  const [chats, setChats] = chatsdata;
+
   const chatBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,6 +56,16 @@ const ChatBar: React.FC<ChatBarProps> = ({
         // Handle success
         console.log('Message sent successfully!');
         setMessage('');
+        setChats([
+          ...chats,
+          {
+            text: message,
+            createdAt: new Date(),
+            username: {
+              fullName: fullName,
+            },
+          },
+        ]);
       } else {
         // Handle error
         console.error('Error sending message');

@@ -14,11 +14,11 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   if (req.method === 'POST') {
-    const { userId, username, text } = req.body;
+    const { userId, username, text, fullName } = req.body;
     const boardCode = req.query.code as string;
     const groupId = req.query.id as string;
 
-    const user = { id: userId, username: username };
+    const user = { id: userId, username: username, fullName: fullName };
     const post = { text };
 
     const postCreation = await createPost(post, user, boardCode, groupId);
