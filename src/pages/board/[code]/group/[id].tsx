@@ -235,7 +235,7 @@ const Group = () => {
                     boardCode={boardCode}
                     groupId={groupDetails.id}
                     organiserId={userDetails.userId}
-                    organiserName={userDetails.username}
+                    organiserName={userDetails.fullName}
                   />
                 </Grid>
               ) : null}

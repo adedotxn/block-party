@@ -33,147 +33,107 @@ export const createDefaultGroups = async (boardCode: string) => {
       // Define default groups
       const defaultGroups = [
         {
+          display: '',
           name: 'Crafters',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Join a community of passionate crafters and unleash your creativity!',
           events: [],
         },
         {
+          display: '',
           name: 'Book Worms',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Dive into the world of literature with fellow book enthusiasts.',
           events: [],
         },
         {
+          display: '',
           name: 'Footballers',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Lace up your boots and join us for exhilarating football matches.',
           events: [],
         },
+
         {
-          name: '🎵 Music Lovers',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
-          events: [],
-        },
-        {
+          display: '',
           name: 'Green Thumbs',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Discover the joys of gardening and exchange tips with fellow plant lovers.',
           events: [],
         },
         {
-          name: 'Foodies',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
-          events: [],
-        },
-        {
+          display: '',
           name: 'Game Warriors',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Calling all gamers! Join our group and conquer the virtual realms together.',
           events: [],
         },
         {
+          display: '',
           name: 'Fitness Warriors',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Embrace a healthy lifestyle with like-minded fitness enthusiasts.',
           events: [],
         },
         {
+          display: '',
           name: 'Popcorn Munchers',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Movie buffs unite! Join us for movie nights and discussions about the latest films.',
           events: [],
         },
+
         {
-          name: 'Dogs Lovers',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
-          events: [],
-        },
-        {
+          display: '',
           name: 'Cats Lovers',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'A community for cat enthusiasts to exchange meow-worthy tales and tips.',
           events: [],
         },
+
         {
-          name: 'Cycling Fanatics',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
-          events: [],
-        },
-        {
-          name: 'Zen Seekers',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
-          events: [],
-        },
-        {
-          name: 'Shutterbugs',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
-          events: [],
-        },
-        {
+          display: '',
           name: 'Boardgame Guild',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
+          description:
+            'Dive into the world of board games and enjoy hours of strategic fun with other board game enthusiasts.',
           events: [],
         },
+
         {
-          name: 'Social Butterflies',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
-          events: [],
-        },
-        {
+          display: '',
           name: 'Outdoor Explorers',
           adminId: 'default',
           id: nanoid(),
           members: [],
-          description: '',
-          events: [],
-        },
-        {
-          name: 'Rhythm Rebels',
-          adminId: 'default',
-          id: nanoid(),
-          members: [],
-          description: '',
+          description:
+            "Embark on thrilling outdoor adventures and explore nature's wonders with fellow adventure seekers",
           events: [],
         },
       ];

@@ -99,7 +99,7 @@ const AllGroups = ({
                           <Text
                             pt={1}
                             fontWeight="semibold"
-                            fontSize="xl"
+                            fontSize="lg"
                             color="#3D3E3E"
                             lineHeight="1.2"
                           >
