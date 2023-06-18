@@ -1,4 +1,4 @@
-import { GroupInterface } from '@/utils/interface';
+import { Event, GroupInterface } from '@/utils/interface';
 import {
   Box,
   Card,
@@ -49,6 +49,8 @@ const AllGroups = ({
 
     return sortedEvents[0];
   });
+
+  console.log('upcomingEvent', { upcomingEvent, groups });
 
   return (
     <section style={{ ...sliderStyle }}>
@@ -111,53 +113,7 @@ const AllGroups = ({
                         </Text>
                       </Grid>
                     ) : (
-                      <Flex minHeight="120px" alignItems="center" px={6} py={2}>
-                        <Box width="20ch" fontFamily="productSans">
-                          <Text
-                            fontWeight="bold"
-                            lineHeight="1.1"
-                            fontSize="2xl"
-                          >
-                            {upcomingEvent[0].title}
-                          </Text>
-                          <Text
-                            pt={1}
-                            fontWeight="semibold"
-                            fontSize="lg"
-                            color="#3D3E3E"
-                            lineHeight="1.2"
-                          >
-                            {upcomingEvent[0].description}{' '}
-                          </Text>
-                          <Flex
-                            pt={1}
-                            alignItems="center"
-                            fontSize="lg"
-                            gap={1}
-                          >
-                            <Text fontWeight="bold" color="red.3">
-                              {upcomingEvent[0].organiser.name}
-                            </Text>
-                            <Box
-                              width={1}
-                              height={1}
-                              rounded="full"
-                              bg="red.3"
-                            />
-                            <Text
-                              fontWeight="light"
-                              fontSize="lg"
-                              color="red.3"
-                            >
-                              {upcomingEvent[0].startTime
-                                ? upcomingEvent[0].startTime
-                                : null}
-                            </Text>
-                          </Flex>
-                        </Box>
-                        <Spacer />
-                        <Calender date={upcomingEvent[0].date} />
-                      </Flex>
+                      <UpcomingEvent event={group.events} />
                     )}
                   </Box>
                 </Flex>
@@ -170,3 +126,39 @@ const AllGroups = ({
 };
 
 export default AllGroups;
+
+const UpcomingEvent = ({ event }: { event: Event[] }) => {
+  const upcomingEvent = event.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  )[0];
+
+  return (
+    <Flex minHeight="120px" alignItems="center" px={6} py={2}>
+      <Box width="20ch" fontFamily="productSans">
+        <Text fontWeight="bold" lineHeight="1.1" fontSize="2xl">
+          {upcomingEvent.title}
+        </Text>
+        <Text
+          pt={1}
+          fontWeight="semibold"
+          fontSize="lg"
+          color="#3D3E3E"
+          lineHeight="1.2"
+        >
+          {upcomingEvent.description}{' '}
+        </Text>
+        <Flex pt={1} alignItems="center" fontSize="lg" gap={1}>
+          <Text fontWeight="bold" color="red.3">
+            {upcomingEvent.organiser.name}
+          </Text>
+          <Box width={1} height={1} rounded="full" bg="red.3" />
+          <Text fontWeight="light" fontSize="lg" color="red.3">
+            {upcomingEvent.startTime ? upcomingEvent.startTime : null}
+          </Text>
+        </Flex>
+      </Box>
+      <Spacer />
+      <Calender date={upcomingEvent.date} />
+    </Flex>
+  );
+};
