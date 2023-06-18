@@ -15,6 +15,7 @@ type ChatBarProps = {
   username: string;
   userId: string;
   groupId: string;
+  chatsdata: any;
 };
 
 const ChatBar: React.FC<ChatBarProps> = ({
@@ -23,9 +24,11 @@ const ChatBar: React.FC<ChatBarProps> = ({
   userId,
   fullName,
   username,
+  chatsdata,
 }) => {
   const [message, setMessage] = useState('');
   const chatBarRef = useRef<HTMLDivElement>(null);
+  const [chats, setChats] = chatsdata;
 
   useEffect(() => {
     if (chatBarRef.current) {
@@ -34,9 +37,16 @@ const ChatBar: React.FC<ChatBarProps> = ({
   }, [message]);
 
   const handleSendMessage = async () => {
-    console.log({ boardCode, groupId, text: message, userId, fullName });
-
     try {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      const currentDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
       const response = await fetch(
         `/api/board/${boardCode}/group/post/${groupId}`,
         {
@@ -44,7 +54,7 @@ const ChatBar: React.FC<ChatBarProps> = ({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ text: message, userId, username }),
+          body: JSON.stringify({ text: message, userId, username, fullName }),
         }
       );
 
@@ -52,6 +62,23 @@ const ChatBar: React.FC<ChatBarProps> = ({
         // Handle success
         console.log('Message sent successfully!');
         setMessage('');
+
+        setChats([
+          ...chats,
+          {
+            createdAt: currentDate,
+            /* id: 'CeldhfMyAHE9sJI1-4Mod', */
+            text: message,
+            /* likes: 0,
+            dislikes: 0,
+            likedBy: [], */
+            user: {
+              fullName: fullName,
+              /* id: 'ZBIMPy8mgisY4m06_Wt2Q', */
+            },
+            /*      comments: [], */
+          },
+        ]);
       } else {
         // Handle error
         console.error('Error sending message');
