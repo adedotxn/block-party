@@ -27,6 +27,14 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+type Chat = {
+  name: string;
+  username: string;
+  user: any;
+  text: string;
+  createdAt: string;
+};
+
 const imagePaths: { [key: string]: string } = {
   'Popcorn Munchers': '/images/Popcorn_Munchers.jpg',
   'Game Warriors': '/images/Game_Warriors.jpg',
@@ -44,6 +52,8 @@ const Group = () => {
   const router = useRouter();
   const boardCode = router.query.code as string;
   const groupId = router.query.id;
+
+  const [chats, setChats] = useState<Chat[]>([]);
 
   //redirect to invite page if not already invited
   useEffect(() => {
@@ -262,7 +272,11 @@ const Group = () => {
             {/** Discussions Panel */}
             <TabPanel>
               <Grid mt={12} gap="2rem" pb={20}>
-                <Chats boardCode={boardCode} groupId={groupDetails.id} />
+                <Chats
+                  boardCode={boardCode}
+                  groupId={groupDetails.id}
+                  chatsdata={[chats, setChats]}
+                />
               </Grid>
               {groupDetails.members.filter(
                 (member) => member.name === userDetails.fullName
@@ -274,6 +288,7 @@ const Group = () => {
                     fullName={userDetails.fullName}
                     userId={userDetails.userId}
                     username={userDetails.username}
+                    chatsdata={[chats, setChats]}
                   />
                 </Grid>
               ) : null}
