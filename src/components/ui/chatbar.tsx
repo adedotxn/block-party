@@ -38,7 +38,7 @@ const ChatBar: React.FC<ChatBarProps> = ({
   }, [message]);
 
   const handleSendMessage = async () => {
-    console.log({ boardCode, groupId, text: message, userId, fullName });
+    console.log(chats);
 
     try {
       const response = await fetch(
@@ -48,7 +48,7 @@ const ChatBar: React.FC<ChatBarProps> = ({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ text: message, userId, username }),
+          body: JSON.stringify({ text: message, userId, username, fullName }),
         }
       );
 
@@ -59,11 +59,18 @@ const ChatBar: React.FC<ChatBarProps> = ({
         setChats([
           ...chats,
           {
-            text: message,
-            createdAt: new Date(),
-            username: {
-              fullName: fullName,
+            createdAt: {
+              seconds: Math.floor(new Date().getTime() / 1000),
+              nanoseconds: '',
             },
+
+            user: {
+              id: userId,
+              fullName: fullName,
+              username: username,
+            },
+
+            text: message,
           },
         ]);
       } else {

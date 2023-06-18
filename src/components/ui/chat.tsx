@@ -16,6 +16,11 @@ type Chat = {
   createdAt: string;
 };
 
+const formattedDate = (timestamp: any) => {
+  const date = new Date(timestamp.seconds * 1000);
+  return date.toISOString().slice(0, 19).replace('T', ' ');
+};
+
 const Chats: React.FC<ChatProps> = ({ boardCode, groupId, chatsdata }) => {
   const [chats, setChats] = chatsdata;
   useEffect(() => {
@@ -27,11 +32,12 @@ const Chats: React.FC<ChatProps> = ({ boardCode, groupId, chatsdata }) => {
         if (response.ok) {
           const data = await response.json();
           const sortedChats = data.data.sort((a: any, b: any) => {
-            const dateA: any = new Date(a.createdAt);
-            const dateB: any = new Date(b.createdAt);
+            const dateA: any = new Date(a.createdAt.seconds);
+            const dateB: any = new Date(b.createdAt.seconds);
             return dateA - dateB;
           });
           setChats(sortedChats);
+          console.log(chats);
         } else {
           console.error('Error fetching chats:', response.status);
         }
@@ -41,6 +47,7 @@ const Chats: React.FC<ChatProps> = ({ boardCode, groupId, chatsdata }) => {
     };
 
     fetchChats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [boardCode, groupId, setChats]);
 
   return (
@@ -51,7 +58,7 @@ const Chats: React.FC<ChatProps> = ({ boardCode, groupId, chatsdata }) => {
           name={post.user.fullName}
           username={post.user.username}
           text={post.text}
-          time={post.createdAt}
+          time={formattedDate(post.createdAt)}
         />
       ))}
     </Grid>

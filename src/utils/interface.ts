@@ -13,7 +13,7 @@ export interface GroupInterface {
 }
 
 export interface Event {
-  id: string;
+  id?: string;
   title: string;
   description?: string;
   date: string;
