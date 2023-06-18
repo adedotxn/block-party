@@ -1,5 +1,5 @@
 import { Grid } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DiscussionCards from '../group/DiscussionCards';
 
 type ChatProps = {
@@ -18,37 +18,38 @@ type Chat = {
 const Chats: React.FC<ChatProps> = ({ boardCode, groupId }) => {
   const [chats, setChats] = useState<Chat[]>([]);
 
-  useEffect(() => {
-    const fetchChats = async () => {
-      try {
-        const response = await fetch(
-          `/api/board/${boardCode}/group/posts/${groupId}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setChats(data.data);
-        } else {
-          console.error('Error fetching chats:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching chats:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchChats = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `/api/board/${boardCode}/group/posts/${groupId}`
+  //       );
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setChats(data.data);
+  //       } else {
+  //         console.error('Error fetching chats:', response.status);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching chats:', error);
+  //     }
+  //   };
 
-    fetchChats();
-  }, [boardCode, groupId, chats]);
+  //   fetchChats();
+  // }, [groupId, chats]);
 
   return (
     <Grid mt={12} gap="2rem" pb={20}>
-      {chats.map((post, index) => (
-        <DiscussionCards
-          key={index}
-          name={post.user.username}
-          username={post.user.username}
-          text={post.text}
-          time={post.createdAt}
-        />
-      ))}
+      {chats !== undefined &&
+        chats.map((post, index) => (
+          <DiscussionCards
+            key={index}
+            name={post.user.username}
+            username={post.user.username}
+            text={post.text}
+            time={post.createdAt}
+          />
+        ))}
     </Grid>
   );
 };

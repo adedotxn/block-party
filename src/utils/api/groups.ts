@@ -281,7 +281,7 @@ export const getSpecificGroupWithId = async (id: string, boardCode: string) => {
 
 export const joinGroup = async (
   boardCode: string,
-  user: { id: string; username: string },
+  user: { id: string; name: string },
   group: { id: string; name: string }
 ) => {
   try {
@@ -295,6 +295,7 @@ export const joinGroup = async (
       if (!snapshot.empty) {
         const doc = snapshot.docs[0];
         try {
+          //update the group
           const reponse = await updateDoc(doc.ref, {
             members: arrayUnion(user),
           });
