@@ -107,12 +107,10 @@ const UserPage: React.FC = () => {
                 fontWeight="400"
                 fontSize="10px"
                 color="#626262"
-                onClick={() => {
+                /* onClick={() => {
                   router.push('/edit_interests');
-                }}
-              >
-                edit
-              </Button>
+                }} */
+              ></Button>
             </Flex>
             <Grid
               templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }}
