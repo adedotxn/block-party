@@ -344,7 +344,6 @@ export const leaveGroup = async (
     }
     const userDoc = userQuerySnapshot.docs[0];
     const user = userDoc.data();
-    console.log(user);
 
     // get the group object
     const groupRef = await getGroupRef(boardCode, groupId);

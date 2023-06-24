@@ -20,8 +20,6 @@ export default async function handler(
   const IDs = req.query.id as string;
   const groupId = IDs[0];
 
-  console.log('query, ', req.query);
-
   // Get specific group details
   if (req.method === 'GET') {
     const response = await getSpecificGroupWithId(groupId, boardCode);
