@@ -10,14 +10,13 @@ import {
   where,
 } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
-import { currentDate } from '../constants';
 
 export type User = {
   fullName: string;
   username: string;
   interests: string[];
-  profilePic: string;
-  areaOfResidence: string;
+  profilePic?: string;
+  areaOfResidence?: string;
   groups?: string[];
 };
 
@@ -36,14 +35,13 @@ export const createUser = async (
       userId,
       fullName: user.fullName,
       username: user.username,
-      interests: user.interests /* 
+      interests: user.interests,
       profilePic: user.profilePic,
-      areaOfResidence: user.areaOfResidence, */,
-      boards: [], //the board name
+      areaOfResidence: user.areaOfResidence,
+      boards: [],
       groups: [],
-      allPosts: [],
       role,
-      createdAt: currentDate,
+      createdAt: new Date(),
     };
     const docRef = await addDoc(userRef, newUser);
     return { status: 'success', userId };

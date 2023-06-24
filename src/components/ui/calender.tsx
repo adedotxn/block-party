@@ -17,7 +17,7 @@ const months: { [key: string]: string } = {
 
 const Calender = ({ date }: { date: string }) => {
   const _date = date.split('-');
-  const year = _date[1];
+  // const year = _date[1];
   const month = _date[1];
   const day = _date[2];
   return (
@@ -27,7 +27,6 @@ const Calender = ({ date }: { date: string }) => {
         bg="red.1"
         color="white"
         py={1}
-        // height="1.5rem"
         borderTopRadius="10px"
         fontSize="15px"
         fontWeight="semibold"

@@ -2,9 +2,7 @@ import { Event } from '@/utils/interface';
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
 import Calender from '../ui/calender';
 
-const Events = (props: { event: Event }) => {
-  const { event } = props;
-  console.log({ event });
+const Events = ({ event }: { event: Event }) => {
   return (
     <Flex
       borderRadius="10px"

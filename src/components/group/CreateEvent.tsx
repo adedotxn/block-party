@@ -18,17 +18,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 import { toast } from 'sonner';
 
+interface CreateEventProps {
+  groupId: string;
+  boardCode: string;
+  organiserId: string;
+  organiserName: string;
+}
+
 const CreateEvent = ({
   groupId,
   boardCode,
   organiserId,
   organiserName,
-}: {
-  groupId: string;
-  boardCode: string;
-  organiserId: string;
-  organiserName: string;
-}) => {
+}: CreateEventProps) => {
   const queryClient = useQueryClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
 

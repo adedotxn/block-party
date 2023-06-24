@@ -11,14 +11,8 @@ interface JoinProps {
   name: string;
 }
 
-const JoinBtn = ({
-  boardCode,
-  groupId,
-  groupName,
-  userId,
-  userGroups,
-  name,
-}: JoinProps) => {
+const JoinBtn = (props: JoinProps) => {
+  const { boardCode, groupId, groupName, userId, userGroups, name } = props;
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -44,13 +38,29 @@ const JoinBtn = ({
       queryClient.invalidateQueries({ queryKey: ['group'] });
       queryClient.invalidateQueries({ queryKey: ['groups'] });
       toast.success(`You are now a part of ${groupName}!`);
-      // toast.success(`You are now a part of ${groupName}!`);
     },
   });
 
-  if (mutation.isSuccess) {
-    console.log('donee');
-  }
+  const leaveGroupMutation = useMutation({
+    mutationFn: async () => {
+      await fetch(`/api/board/${boardCode}/group/${groupId}/${userId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    },
+    onError: () => {
+      toast.error('Error leaving group. Try again');
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userdata'] });
+      queryClient.invalidateQueries({ queryKey: ['group'] });
+      queryClient.invalidateQueries({ queryKey: ['groups'] });
+      toast(`You are no longer a part of ${groupName}`);
+    },
+  });
 
   const isAGroupMember =
     userGroups.filter((group) => group.name === groupName).length === 1;
@@ -66,7 +76,7 @@ const JoinBtn = ({
           fontSize="lg"
           colorScheme="red"
           onClick={() => {
-            //Logic to leave group
+            leaveGroupMutation.mutate();
           }}
         >
           Leave
