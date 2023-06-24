@@ -69,7 +69,7 @@ const InvitePage: NextPage = () => {
   }
 };
 
-const validInviteLinks = ['sara', 'philip', 'peter', 'assad'];
+const validInviteLinks = ['P15Ry1', 'p15ry1'];
 
 const validateInviteLink = (inviteLink: any) => {
   return validInviteLinks.includes(inviteLink);
