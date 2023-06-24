@@ -10,7 +10,7 @@ const InvitePage: NextPage = () => {
   const router = useRouter();
   const { invitelink } = router.query;
 
-  const isValidInvite = validateInviteLink(invitelink);
+  const isValidInvite = validateInviteLink(invitelink as string);
 
   if (isValidInvite) {
     return <OnboardingPage />;
@@ -69,10 +69,12 @@ const InvitePage: NextPage = () => {
   }
 };
 
-const validInviteLinks = ['P15Ry1', 'p15ry1'];
+const demoLink = 'p15ry1';
 
-const validateInviteLink = (inviteLink: any) => {
-  return validInviteLinks.includes(inviteLink);
+const validateInviteLink = (inviteLink: string) => {
+  if (inviteLink !== undefined) {
+    return demoLink === inviteLink.toLowerCase();
+  }
 };
 
 export default InvitePage;

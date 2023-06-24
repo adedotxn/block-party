@@ -257,7 +257,7 @@ const Group = () => {
                 />
               </Grid>
               {groupDetails.members.filter(
-                (member) => member.name === userDetails.fullName
+                (member) => member.id === userDetails.userId
               ).length === 1 ? (
                 <Grid placeItems="center" mt={6}>
                   <ChatBar
