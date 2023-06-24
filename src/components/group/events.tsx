@@ -4,7 +4,6 @@ import Calender from '../ui/calender';
 
 const Events = (props: { event: Event }) => {
   const { event } = props;
-  console.log({ event });
   return (
     <Flex
       borderRadius="10px"

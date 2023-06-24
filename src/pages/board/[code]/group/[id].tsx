@@ -6,7 +6,7 @@ import Chats from '@/components/ui/chat';
 import ChatBar from '@/components/ui/chatbar';
 import Loader from '@/components/ui/loader';
 import { GroupInterface, User } from '@/utils/interface';
-import { ChevronLeftIcon, CloseIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon } from '@chakra-ui/icons';
 import {
   Box,
   Divider,
@@ -58,7 +58,6 @@ const Group = () => {
   //redirect to invite page if not already invited
   useEffect(() => {
     const username = localStorage.getItem('loggedinuser');
-    console.log('user:', localStorage.getItem('loggedinuser'));
     if (username === null) {
       router.push(`/invite/1`);
     }
@@ -110,13 +109,7 @@ const Group = () => {
     enabled: boardCode !== undefined && groupId !== undefined,
   });
 
-  const [joined, setJoined] = useState(false);
-
-  const joinGroup = () => {
-    return joined ? setJoined(false) : setJoined(true);
-  };
-
-  // /**
+  /**
   if (!isLoading && !isError) {
     console.log('Group Data: ', data);
   }
@@ -124,7 +117,7 @@ const Group = () => {
   if (!loadingUser && !isUserError) {
     console.log('userdata ->>', userData);
   }
-  // */
+   */
 
   if (isError) {
     console.error(error);
@@ -153,18 +146,15 @@ const Group = () => {
           borderBottomRadius="1.3rem"
           width={{ base: '100vw', md: '40vw' }}
         >
-          <Flex pt={4} px={2} alignItems="center">
-            <Link as={NextLink} href={`/board/${boardCode}/groups`}>
-              <ChevronLeftIcon
-                boxSize={8}
-                color="white"
-                onClick={() => router.push(`/board/${boardCode}/groups`)}
-              />
-            </Link>
-
-            <Spacer />
-            <CloseIcon color="white" />
-          </Flex>
+          <Link as={NextLink} href={`/board/${boardCode}/groups`}>
+            <ChevronLeftIcon
+              mt={4}
+              mx={2}
+              boxSize={8}
+              color="white"
+              onClick={() => router.push(`/board/${boardCode}/groups`)}
+            />
+          </Link>
         </Box>
 
         <Box px={4} mb={2} mt={6}>

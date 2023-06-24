@@ -29,9 +29,9 @@ const imagePaths: { [key: string]: string } = {
 const AllGroups = ({
   groups,
   boardCode,
-  username,
+  name,
 }: {
-  username: string;
+  name: string;
   groups: GroupInterface[];
   boardCode: string;
 }) => {
@@ -41,16 +41,6 @@ const AllGroups = ({
     placeItems: 'center',
   };
   const router = useRouter();
-
-  const upcomingEvent = groups.map((group) => {
-    const sortedEvents = group.events.sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
-
-    return sortedEvents[0];
-  });
-
-  console.log('upcomingEvent', { upcomingEvent, groups });
 
   return (
     <section style={{ ...sliderStyle }}>
@@ -74,9 +64,8 @@ const AllGroups = ({
                 >
                   <CardBody>
                     <Grid>
-                      {group.members.filter(
-                        (member) => member.username === username
-                      ).length === 1 ? (
+                      {group.members.filter((member) => member.name === name)
+                        .length === 1 ? (
                         // Star to signify current user is already a group member
                         <GroupStar boxSize={8} />
                       ) : null}

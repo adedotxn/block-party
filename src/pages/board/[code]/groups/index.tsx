@@ -105,11 +105,7 @@ const Groups = () => {
         </Link>
       </Flex>
 
-      <AllGroups
-        groups={groups}
-        boardCode={boardCode}
-        username={user.username}
-      />
+      <AllGroups groups={groups} boardCode={boardCode} name={user.fullName} />
     </Container>
   );
 };

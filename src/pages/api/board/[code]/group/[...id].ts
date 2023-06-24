@@ -1,4 +1,8 @@
-import { getSpecificGroupWithId, joinGroup } from '@/utils/api/groups';
+import {
+  getSpecificGroupWithId,
+  joinGroup,
+  leaveGroup,
+} from '@/utils/api/groups';
 import { ResponseInterface } from '@/utils/interface';
 import { DocumentData } from 'firebase/firestore';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -13,11 +17,14 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const boardCode = req.query.code as string;
-  const id = req.query.id as string;
+  const IDs = req.query.id as string;
+  const groupId = IDs[0];
+
+  console.log('query, ', req.query);
 
   // Get specific group details
   if (req.method === 'GET') {
-    const response = await getSpecificGroupWithId(id, boardCode);
+    const response = await getSpecificGroupWithId(groupId, boardCode);
 
     if (response?.status === 'success') {
       const data = response.data;
@@ -31,7 +38,7 @@ export default async function handler(
 
   if (req.method === 'POST') {
     const { userId, name } = req.body;
-    const groupResp = await getSpecificGroupWithId(id, boardCode);
+    const groupResp = await getSpecificGroupWithId(groupId, boardCode);
 
     if (groupResp?.status === 'success' && groupResp.data) {
       const groupRespData: any = groupResp.data;
@@ -47,11 +54,30 @@ export default async function handler(
         return res
           .status(200)
           .json({ status: 'success', message: 'Group joined successfully' });
+      } else {
+        return res
+          .status(400)
+          .json({ status: 'error', message: 'Error joining group' });
       }
     }
   }
 
-  if (req.method !== 'GET') {
-    return res.status(200).send({ status: 'error', message: 'Wrong method' });
+  if (req.method === 'DELETE') {
+    /** /boardCode/group/groupId/memberId
+     * DELETE request
+     */
+
+    const memberId = IDs[1];
+    const response = await leaveGroup(boardCode, groupId, memberId);
+
+    if (response?.status === 'success') {
+      return res
+        .status(200)
+        .json({ status: 'success', message: 'Left group successfully' });
+    } else {
+      return res
+        .status(400)
+        .json({ status: 'error', message: 'Error leaving group' });
+    }
   }
 }

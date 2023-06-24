@@ -1,6 +1,7 @@
 import { db } from '@lib/firebase/client';
 import {
   addDoc,
+  arrayRemove,
   arrayUnion,
   collection,
   doc,
@@ -295,7 +296,8 @@ export const joinGroup = async (
       if (!snapshot.empty) {
         const doc = snapshot.docs[0];
         try {
-          //update the group
+          //update the group with the new user
+          console.log(user);
           const reponse = await updateDoc(doc.ref, {
             members: arrayUnion(user),
           });
@@ -321,6 +323,60 @@ export const joinGroup = async (
           return { status: 'error', error };
         }
       }
+    }
+  } catch (error) {
+    return { status: 'error', error };
+  }
+};
+
+export const leaveGroup = async (
+  boardCode: string,
+  groupId: string,
+  memberId: string
+) => {
+  try {
+    // get the user object
+    const userRef = collection(db, 'users');
+    const userQuery = query(userRef, where('userId', '==', memberId));
+    const userQuerySnapshot = await getDocs(userQuery);
+    if (userQuerySnapshot.empty) {
+      return { status: 'error', message: 'User not found' };
+    }
+    const userDoc = userQuerySnapshot.docs[0];
+    const user = userDoc.data();
+    console.log(user);
+
+    // get the group object
+    const groupRef = await getGroupRef(boardCode, groupId);
+    if (groupRef.status === 'error')
+      return { status: 'error', message: groupRef.message };
+    if (!groupRef.data || groupRef.data.empty) {
+      return { status: 'error', message: 'Group not found' };
+    }
+    const groupDoc = groupRef.data.docs[0];
+    const group = groupDoc.data();
+
+    // update the group doc by removing the user details
+    try {
+      //update the group by removing the user
+      await updateDoc(groupDoc.ref, {
+        members: arrayRemove({ id: user.userId, name: user.fullName }),
+      });
+
+      // then update the user docs by removing the group details
+      try {
+        await updateDoc(userDoc.ref, {
+          groups: arrayRemove({ id: group.id, name: group.name }),
+        });
+
+        return {
+          status: 'success',
+        };
+      } catch (error) {
+        return { status: 'error', error };
+      }
+    } catch (error) {
+      return { status: 'error', error };
     }
   } catch (error) {
     console.log(error);
