@@ -109,16 +109,6 @@ const Group = () => {
     enabled: boardCode !== undefined && groupId !== undefined,
   });
 
-  /**
-  if (!isLoading && !isError) {
-    console.log('Group Data: ', data);
-  }
-
-  if (!loadingUser && !isUserError) {
-    console.log('userdata ->>', userData);
-  }
-   */
-
   if (isError) {
     console.error(error);
   }
@@ -185,8 +175,6 @@ const Group = () => {
           </Flex>
         </Box>
         <Divider bg="blackAlpha.900" height={0.4} />
-
-        {/* <Discussion /> */}
 
         <Tabs
           isFitted

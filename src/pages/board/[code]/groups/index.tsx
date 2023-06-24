@@ -63,15 +63,6 @@ const Groups = () => {
     enabled: boardCode !== undefined,
   });
 
-  /*
-  if (!isLoading && !isError) {
-    // console.log('Data: ', data);
-  }
-
-  if (!loadingUser && !isUserError) {
-    // console.log('userdata ->', userData);
-  }*/
-
   if (isError) {
     console.error(error);
   }
